@@ -1,0 +1,152 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: wordpress-rengine\n"
+"POT-Creation-Date: 2016-10-19 13:08+0300\n"
+"PO-Revision-Date: 2017-02-13 14:15+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fr_FR\n”
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: search form strings --------------------------
+msgid "pickup_parking_name"
+msgstr "Nom du point de retrait"
+
+msgid "return_parking_name"
+msgstr "Point de retrait"
+
+msgid "same_parking"
+msgstr "Même parking"
+
+msgid "pickup_date"
+msgstr "Date et heure de départ"
+
+msgid "return_date"
+msgstr "Date et heure de retour"
+
+msgid "search_button"
+msgstr "Rechercher"
+
+#: search results page --------------------------
+msgid "change_dates"
+msgstr "MODIFIER LES DATES"
+
+msgid "available_cars"
+msgstr "Véhicules disponibles"
+
+msgid "from"
+msgstr "De"
+
+msgid "to"
+msgstr "à"
+
+msgid "for"
+msgstr "Pour"
+
+msgid "brands"
+msgstr "MARQUES"
+
+msgid "attributes"
+msgstr " Caractéristiques du véhicule"
+
+msgid "pickup"
+msgstr "RETRAIT"
+
+msgid "return"
+msgstr "RETOUR"
+
+msgid "no_results"
+msgstr "Aucun résultat !"
+
+msgid "button"
+msgstr "SELECTIONNER"
+
+msgid "sold_out"
+msgstr "Ce véhicule va bientôt être réservé !"
+
+msgid "last_booking"
+msgstr "Dernière réservation pour ce véhicule !"
+
+#: Car & Extras revision page --------------------------
+msgid "your_choise"
+msgstr "Votre choix"
+
+msgid "pricing"
+msgstr "Prix"
+
+msgid "extras"
+msgstr "Suppléments"
+
+msgid "driver_details"
+msgstr "Informations sur le conducteur"
+
+msgid "login_label"
+msgstr "Veuillez vous connecter ou vous inscrire pour continuer"
+
+msgid "login_button"
+msgstr "S'AUTHENTIFIER"
+
+msgid "register_button"
+msgstr "S'ENREGISTRER"
+
+msgid "full_name"
+msgstr "Nom complet"
+
+msgid "phone"
+msgstr "Téléphone"
+
+msgid "flight_number"
+msgstr "Vol numéro"
+
+msgid "total_cost"
+msgstr "Montant total"
+
+msgid "continue_button"
+msgstr "CONTINUER POUR PAYER"
+
+msgid "terms_label"
+msgstr "J'ai lu et j'accepte les conditions générales de vente"
+
+msgid "flat_cost"
+msgstr "Coût de la location"
+
+#: Order Revision --------------------------
+msgid "action_required"
+msgstr "ACTION REQUISE"
+
+msgid "reference_message"
+msgstr "Votre numéro de réservation est :"
+
+msgid "paypal_message"
+msgstr "Votre ID de paiement PAYPAL est "
+
+msgid "button_message"
+msgstr "Veuillez cliquer sur le bouton \"Payer Maintenant\" pour régler le montant de votre réservation"
+
+msgid "payment_button"
+msgstr "PAYEZ MAINTENANT"
+
+#: Payment --------------------------
+msgid "payment_success"
+msgstr "PAIEMENT REUSSI"
+
+msgid "success"
+msgstr "SUCCES"
+
+msgid "success_message"
+msgstr "Votre réservation à été traité avec succès. Veuillez vérifier votre email pour confirmation."
+
+msgid "payment_failure"
+msgstr "ECHEC DU PAIEMENT"
+
+msgid "failure"
+msgstr "ECHEC"
+
+msgid "failure_message"
+msgstr "Votre réservation à échouée. Veuillez réessayer ou nous contacter."

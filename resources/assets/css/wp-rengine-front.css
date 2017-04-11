@@ -1,0 +1,373 @@
+@import 'https://fonts.googleapis.com/css?family=Open+Sans';
+
+.result-item, .summary, .extras, .driver, .action-container, .success-container {
+ 	background-color: #ffffff;
+	border: 1px solid #d9d9d9;
+	border-radius: 3px;
+	margin-bottom: 30px;
+	padding-left: 10px;
+	padding-bottom: 20px;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.result-item img, .summary img {
+	padding-top: 30px;
+}
+.service-name {
+	font-size:18px;
+	padding-top: 30px;
+}
+
+
+.service-group {
+	font-size: 10px;
+	text-transform: uppercase;
+	padding-bottom: 10px;
+	color: #767676;
+}
+
+.service-low {
+	color: #fc8200;
+	font-weight: 300;
+}
+
+.service-last {
+	color:#760000;
+	font-weight: 300;
+}
+
+.service-offer{
+	font-size: 10px;
+    background: hsla(121, 33%, 35%, 0.1);
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: green;
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+.service-offer-extra{
+	font-size: 10px;
+    background: hsla(0, 100%, 50%, 0.11);
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: red;
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+.service-attributes {
+	font-size: 12px;
+	color: #767676;
+}
+.service-attributes strong{
+	color: inherit;
+}
+.service-attributes .list-inline li {
+	padding-bottom: 0px;
+	padding-left: 2px;
+	padding-right: 0px;
+}
+
+.service-prices { 
+	padding-top: 30px;
+	padding-bottom: 20px;
+}
+.service-prices .currency, .total-price .currency, .total-cost .currency{ 
+	font-size:22px;
+	font-weight: 700;
+}
+.service-prices .service-total, .total-price .clean-price, .total-cost{ 
+	font-size:32px;
+	font-weight: 700;
+}
+.service-book a, .button, .action-container a, .success-container a{ 
+	border: 1px solid #00a6d8;
+	border-radius: 3px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 35px;
+	padding-right: 35px;
+	color: #00a6d8;
+	margin:10px;
+}
+
+.service-book a:hover, .caution-container a:hover, .button:hover, .action-container a:hover, .success-container a:hover{ 
+	background-color: #00a6d8;
+	color: #ffffff;
+}
+
+.service-cost-day {
+	color: #767676;
+}
+
+.change_dates {
+	padding-bottom: 20px;
+}
+.change_dates a{
+	color: #00a6d8;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 12px;
+}
+
+.search-form {
+	padding-top: 20px;
+}
+
+.book-button {}
+.pricing {
+	padding-top: 30px;
+	font-size:18px;
+	padding-bottom: 20px;
+}
+
+.price-analysis {
+	list-style: none;
+	padding-left: 0px;
+	font-size:12px;
+}
+.price-analysis .discount {
+	color: green;
+}
+
+.price-analysis .extra {
+	color: red;
+}
+
+.driver-wrapper {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.extra-wrapper {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.extra-wrapper h2, .driver-wrapper h2 {
+	padding-top: 20px;
+}
+
+.extra-wrapper img {
+	height: 40px;
+	float:right;
+}
+
+.extra-wrapper .row {
+	padding-bottom: 20px;
+}
+
+.extra-wrapper .form-control {
+	display: inline-block;
+}
+.driver-wrapper {
+	font-weight: 100;
+	color:#b0b0b0;
+}
+.driver-wrapper .row {
+	padding-bottom: 10px;
+}
+.pricing .extra { color:#62ab51;}
+.pricing .discount { color: #e84546;}
+.total-price {}
+.clean-price {}
+.grey {}
+.extra-service {
+	width:60px;
+}
+.extra-title { 
+	padding-left: 0px;
+	font-size: 18px;
+	font-weight: 100;
+}
+.extra-cost { 
+	font-size: 14px;
+	font-weight: 100;
+	color:#62ab51;
+}
+.extra-desc {
+	font-size: 12px;
+	font-weight: 100;
+	color:#b0b0b0;
+}
+.extras-selected{
+	padding-left: 20px;
+	font-size: 14px;
+	font-weight: 100;
+	color:#62ab51;
+}
+.caution-container {
+	text-align: center;
+	border: 1px solid #f83738;
+	height: 210px;
+	margin-bottom: 20px;
+}
+.caution-symbol { 
+	font-size: 50px;
+	color: #f83738;
+	padding-top: 30px;
+}
+
+.caution-container a{ 
+	border: 1px solid #00a6d8;
+	border-radius: 3px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+	color: #00a6d8;
+}
+
+.caution-desc { 
+	padding-bottom: 20px;
+}
+.caution-link {margin-right: 10px;}
+
+label[for=tos-check] {
+	vertical-align: -60%;
+}
+
+label[for=tos-check] a {
+	color: #00a6d8;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 12px;
+	font-weight: 100;
+}
+
+input[name="tos-check"] {
+	vertical-align: -75%;
+}
+
+.button {
+	background: none;
+	font-weight: 100;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.action-container {
+	padding-left: 30px;
+	padding-right: 30px;
+}
+.action-symbol {
+	font-size: 50px;
+	color: #b0b0b0;
+	padding-top: 30px;
+}
+
+.reference{
+	font-size: 50px;
+	font-weight: 700;
+	padding-bottom: 20px;
+}
+
+.action-button, .success-button{
+	padding-bottom: 30px;
+}
+
+.success-symbol{ 
+	font-size: 30px;
+	color: #70b15f;
+	padding-top: 30px;
+}
+.failure-symbol{ 
+	font-size: 50px;
+	color: #f83738;
+	padding-top: 30px;
+}
+
+/* Filter Widget Styling*/
+.wp-rengine-search-filter{
+	font-family: 'Open Sans', sans-serif;
+/*	color: #060032;
+*/}
+
+.wp-rengine-search-filter input[type="checkbox"]{
+	height: 19px;
+	width: 19px;
+	padding-top: 10px;
+	background: #ffffff;
+}
+
+.wp-rengine-search-filter label {
+	  vertical-align: 20%;
+	  padding-left: 5px;
+	  font-weight: 300;
+}
+
+.wp-rengine-search-filter h4 {
+	padding-top: 40px;
+	font-size: 14px;
+	font-weight: 300;
+}
+
+.modal-dialog {
+	left:0px;
+}
+
+.clear_input {
+	background: url(../images/clear-input.png) center center no-repeat transparent;
+	box-sizing: content-box;
+	float: right;
+	height: 30px;
+	padding-left: 10px;
+	width: 30px;
+}
+
+
+/* Removes all the highligh on focus in every input text area box */
+*:focus {
+	outline: 0;
+}
+
+.acting_username_wrapper {
+	position: absolute;
+	right: 5%;
+	width: 28%;
+	z-index: 100;
+}
+
+.pac-container {
+	font-family: Roboto;
+	border:1px solid;
+}
+
+#prediction_results {
+	background-color: #fff;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border: 1px solid #eee;
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+}
+
+#prediction_results li {
+	background: url("../images/pointer-grey.png") no-repeat scroll 5px center transparent;
+	border-bottom: 1px solid #ececec;
+	padding-bottom: 10px;
+	padding-left: 34px;
+	padding-top: 10px;
+}
+
+
+#prediction_results li:hover,
+#prediction_results li:focus {
+	cursor: pointer;
+	background-color: #ECECEC;
+}
+
+#prediction_results li:first-child {
+	margin-top: 10px;
+}
+
+#prediction_results li:last-child {
+	border: 0;
+}
+
+.location-icon {
+	position: relative;
+    float: right;
+    top: 40px;
+    right: 30px;
+    -webkit-text-stroke: 1px background-color;
+}

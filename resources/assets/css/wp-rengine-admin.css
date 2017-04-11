@@ -1,0 +1,30 @@
+.wp-rengine-admin {
+	padding: 10px;
+}
+.wp-rengine-admin .container {
+	background-color: #fff;
+	width: 100%;
+}
+#wp-rengine-places-map {
+	width: 100%;
+	height: 500px;
+}
+.parking-group {
+	margin-bottom: 10px;
+}
+.parking-row-add, .parking-row-del {
+	display: inline-block;
+}
+
+#Layer_1 {
+	height: 30px;
+    display: inline-block;
+    float: left;
+    margin-right: -256px;
+    top: 20px;
+    position: relative;
+}
+
+#datetimepicker1, #datetimepicker2 {
+	z-index: 10000;
+}

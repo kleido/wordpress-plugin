@@ -1,0 +1,209 @@
+<div class="modal fade bs-example-modal-lg1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+       <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Terms & Conditions</h4>
+      </div>
+      <div class="modal-body">
+        {{terms}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+	<div class="col-xs-12 text-center">
+		{% if type == "activity" %}
+			<h3>{{tr_selected_services}} </h3>
+		{% else %}
+			<h3>{{tr_selected_services}} </h3>
+		{% endif %}
+		{% if hideLocations == "true" or type == "activity" %}
+			<h4 class="hidden">{{tr_pickup}} : {{pickupParking}} ({{pickupTime}}) -> {{tr_return}}: {{returnParking}} ({{returnTime}})</h4>
+		{% else %}
+			<h4>{{tr_pickup}}: {{pickupParking}} ({{pickupTime}}) -> {{tr_return}}: {{returnParking}} ({{returnTime}})</h4>
+		{% endif %}
+	</div>
+</div>
+<div class="summary" >
+	<div class="row">
+		<div class="col-md-3">
+			{% if service.media[0]  %}
+				<img  style="max-width:170px;" src="{{service.media[0]}}" alt="{{service.title}}">
+			{% endif %}
+		</div>
+		<div class="col-md-6">
+			<div class="service-name">{{service.brand.name}} {{service.title}}</div>
+			<div class="service-group">{{service.group.name}}</div> 
+			<div class="service-attributes">
+				<ul class="list-inline">
+				{% for attribute in service.attributes %}
+					<li>
+						{{attribute.name}}: <strong>{{attribute.value}}</strong>,
+					</li>
+				{% endfor %}
+				</ul>
+			</div>
+			{% if service.description  %}
+				<div class="row">
+					<div class="service-attributes">
+					<div class="col-xs-3 black"><strong>{{tr_notes}}:</strong> </div>
+					<div class="col-xs-9">{{service.description}}</div>
+					</div>
+				</div>
+			{% endif %}
+			{% if service.includes  %}
+				<div class="row">
+					<div class="service-attributes">
+						<div class="col-xs-3 black"><strong>{{tr_includes}}:</strong> </div>
+						<div class="col-xs-9">{{service.includes}}</div>
+					</div>
+				</div>	
+			{% endif %}
+			{% if service.excludes  %}
+				<div class="row">
+					<div class="service-attributes">
+						<div class="col-xs-3 black"><strong>{{tr_excludes}}:</strong></div>
+						<div class="col-xs-9">{{service.excludes}}</div>
+					</div>
+				</div>		
+			{% endif %}
+		</div>
+		<div class="col-md-3">
+			<div class="pricing">{{tr_pricing}}</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<ul class = "price-analysis">
+						<li>{{tr_flat_cost}}: <span class="text-right">{{currency}}{{pricingData.flatCost}}</span> </li>
+						{% for offer in pricingData.offers %}
+						<li class="{{offer.type}}">{{offer.name}}: <span class="text-right">{{currency}}{{offer.cost}}</span></li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="col-xs-12">
+					<span class="total-price"><span class="currency" data-currency="{{currency}}">{{currency}}</span><span class="clean-price">{{pricingData.totalCost}}</span>
+					{% if type == "activity" %}
+							<div class="service-cost-day"> 
+								{{tr_for}} {{paxReadable}}
+							</div>
+						{% elseif hide_locations == true  %}
+							<div class="service-cost-day"> /div>
+						{% else %}	
+							<div class="service-cost-day"> 
+								{{tr_for}} {{timeDifferenceReadable}}
+							</div>
+					{% endif %}	
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<form method="post" action="{{orderRevisionURL}}" class="confirm-order"  data-toggle="validator" role="form">
+{% if service.extras %}
+	<div class="extras">
+		<div class="extra-wrapper">
+			<h2>{{tr_extras}}</h2>
+			{% for extra in service.extras %}
+				<div class="row">
+					<div class="col-xs-2">
+						{% if extra.media != '' %}
+							<img  src="{{extra.media}}" alt="{{extra.name}}">
+						{% endif %}
+					</div>
+				    <div class="col-xs-7">
+						<div class="extra-title">
+							{{extra.name}} <span class="extra-cost">{{currency}}{% if extra.params.fixedPrice %}{{extra.params.fixedPrice}}{% set type='' %}{% else %}{{extra.params.price}} per day{% set type='per day' %} {% endif %}</span>
+						</div>
+						<div class="extra-desc">
+							{{extra.description}}
+						</div>
+					</div>
+					<div class="col-xs-3">
+						<select class="extra-service form-control" name="extras[{{extra.id}}]" id="extras[{{extra.id}}]" data-type="{{type}}" data-id="{{extra.id}}" data-cost="{% if extra.params.fixedPrice %}{{extra.params.fixedPrice}}{% else %} {{extra.params.price}}{% endif %}" data-days="{{totalDays}}">
+							{% for i in 0..extra.params.rangeMax %}
+							    <option value="{{i}}">{{i}}</option>
+							{% endfor %}
+						</select>
+						<span class="extras-selected" id="ex-{{extra.id}}"></span>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endif %}
+	<div class="driver">
+		<div class="row">
+			<div class="driver-wrapper">
+				<h2>{{tr_driver_details}}</h2>
+				{% if not isLoggedIn %}
+				<div class="col-xs-12 col-sm-6 hidden">
+					<div class="caution-container">
+						<div class="caution-symbol">
+							<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+						</div>
+						<div class="caution-desc">
+							{{tr_login_label}}
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<a href="{{loginURL}}" class="caution-link">{{tr_login_button}}</a>
+								<a href="{{registrationURL}}" class="caution-link">{{tr_register_button}}</a>
+							</div>
+						</div>
+					</div>				
+				</div>
+				{% endif %}
+				<div class="col-xs-12 col-sm-12">
+					<div class="row form-group">
+						<div class="col-xs-4"><label for="fullname" class="control-label">{{tr_full_name}}</label></div>
+						<div class="col-xs-8 ">
+							<input class="form-control" type="text" name="fullname" value="{{currentUser.user_firstname}} {{currentUser.user_lastname}}" required>
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col-xs-4"><label for="email" class="control-label">Email</label></div>
+						<div class="col-xs-8 ">
+							<input class="form-control" type="email" name="email" value="{{currentUser.user_email}}" required  data-error="Invalid email address">
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col-xs-4"><label for="tel" class="control-label">{{tr_phone}}</label></div>
+						<div class="col-xs-8 ">
+							<input class="form-control" type="tel" name="tel" required >
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-4">{{tr_flight_number}}</div>
+						<div class="col-xs-8 form-group">
+							<textarea class="form-control" name="flight-number" id="flight-number" rows="3" wrap="soft" placeholder = "{{tr_comment_placeholder}}"></textarea>
+						</div>
+					</div>
+					 <div class="help-block with-errors"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		
+		</br></br>
+		<div class="col-xs-12 text-center">
+			<div>{{tr_flat_cost}}: {{currency}}{{pricingData.flatCost}}</div>
+			<div>{{tr_extras}}: {{currency}}<span id="extra-cost">0<span></div> 
+			{{tr_total_cost}}: <span class="total-cost" data-flatcost="{{service.total_price}}"><span class = "currency">{{currency}}</span>{{service.total_price}}</span>
+			<div class="text-center"><button class="button" type="submit">{{tr_continue_button}}</button></div>
+		</div>
+		<div class="col-xs-12  text-center">
+			<input type="checkbox" name="tos-check" class="tos-check hidden" id="tos-check" checked> 
+			<label for="tos-check"><a href="#" data-toggle="modal" data-target=".bs-example-modal-lg1">{{tr_terms_label}}</a></label>
+		</div>
+	</div>
+	{% for key, input in inputs %}
+		<input type="hidden" name="{{key}}" value="{{input}}">
+    {% endfor %}
+    <input type="hidden" name="currency" value="{{currency}}">
+    
+
+</form>

@@ -1,0 +1,150 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: reservation-engine\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hu_HU\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: search form strings --------------------------
+msgid "pickup_parking_name"
+msgstr "felvétel_helye"
+
+msgid "return_parking_name"
+msgstr "leadás helye"
+
+msgid "same_parking"
+msgstr "Leadás helye megegyezik"
+
+msgid "pickup_date"
+msgstr "Felvétel Dátum & Idõ"
+
+msgid "return_date"
+msgstr "Leadás Dátum & Idõ"
+
+msgid "search_button"
+msgstr "Keresés"
+
+#: search results page --------------------------
+msgid "change_dates"
+msgstr "MÁSIK DÁTUM"
+
+msgid "available_cars"
+msgstr "Elérhetõ autók"
+
+msgid "from"
+msgstr "tól"
+
+msgid "to"
+msgstr "ig"
+
+msgid "for"
+msgstr "For"
+
+msgid "brands"
+msgstr "MÁRKA"
+
+msgid "attributes"
+msgstr "AUTÓ TULAJDONSÁGAI"
+
+msgid "pickup"
+msgstr "FELVÉTEL"
+
+msgid "return"
+msgstr "LEADÁS"
+
+msgid "no_results"
+msgstr "Nem található!"
+
+msgid "button"
+msgstr "KIVÁLASZT"
+
+msgid "sold_out"
+msgstr "Ez az autó hamarosan elfogy!"
+
+msgid "last_booking"
+msgstr "Utolsó foglalás erre az autóra!"
+
+#: Car & Extras revision page --------------------------
+msgid "your_choise"
+msgstr "Az Ön választása"
+
+msgid "pricing"
+msgstr "Árak"
+
+msgid "extras"
+msgstr "Extrák"
+
+msgid "driver_details"
+msgstr "Sofõr Adatai"
+
+msgid "login_label"
+msgstr "A folytatáshoz Lépjen be vagy Regisztráljon"
+
+msgid "login_button"
+msgstr "BELÉPÉS"
+
+msgid "register_button"
+msgstr "REGISZTRÁCIÓ"
+
+msgid "full_name"
+msgstr "TELJES NÉV"
+
+msgid "phone"
+msgstr "Mobil"
+
+msgid "flight_number"
+msgstr "Járat száma"
+
+msgid "total_cost"
+msgstr "Teljes összeg"
+
+msgid "continue_button"
+msgstr "TOVÁBBLÉPÉS A FIZETÉSRE"
+
+msgid "terms_label"
+msgstr "Az Általános Szerzõdési Feltételeket elolvastam és elfogadom"
+
+msgid "flat_cost"
+msgstr "egységár"
+
+#: Order Revision --------------------------
+msgid "action_required"
+msgstr "ACTION REQUIRED"
+
+msgid "reference_message"
+msgstr "Az Ön foglalási kódja"
+
+msgid "paypal_message"
+msgstr "PAYPAL fizetés felhasználó"
+
+msgid "button_message"
+msgstr "Kérjük kattintson a FIZETÉS MOST gombra a foglalás kifizetéséhez"
+
+msgid "payment_button"
+msgstr "FIZETÉS MOST"
+
+#: Payment --------------------------
+msgid "payment_success"
+msgstr "SIKERES FIZETÉS"
+
+msgid "success"
+msgstr "SIKER"
+
+msgid "success_message"
+msgstr "A foglalási igénye sikeresen elküldve. Kérjük ellenõrizze email fiókját a jóváhagyáshoz!"
+
+msgid "payment_failure"
+msgstr "SIKERTELEN FIZETÉS"
+
+msgid "failure"
+msgstr "HIBA"
+
+msgid "failure_message"
+msgstr "A foglalása sikertelen volt. Kérjük próbálja újra vagy lépjen velünk kapcsolatba."

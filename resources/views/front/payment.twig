@@ -1,0 +1,50 @@
+<div class="row">
+	<div class="col-xs-12 text-center">
+		{% if resultPayPal == "cancelled" %}
+			<div class="row">
+				<div class="col-xs-12 text-center">
+					<h3>{{tr_payment_failure}}</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 text-center">
+					<div class="success-container">
+						<div class="failure-symbol">
+							<i class="fa fa-frown-o" aria-hidden="true"></i>
+							<div>{{tr_failure}}</div>
+						</div>
+						<div class="success-desc">
+							<p>{{tr_failure_message}}</p>
+						</div>
+						<div class="success-button">
+						</div>
+					</div>
+				</div>
+			</div>
+		{% else %}
+			<div class="row">
+				<div class="col-xs-12 text-center">
+					<h3>{{tr_payment_success}}</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 text-center">
+					<div class="success-container">
+						<div class="success-symbol">
+							<i class="fa fa-smile-o" aria-hidden="true"></i>
+							<div>{{tr_success}}</div>
+						</div>
+						<div class="success-desc">
+							<p>{{tr_reference_message}}</p>
+							<div class="reference">#{{ reference }}</div>
+							<p>{{tr_success_message}}</p>
+
+						</div>
+						<div class="success-button">
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+	</div>
+</div>

@@ -1,0 +1,151 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: wordpress-rengine-el\n"
+"POT-Creation-Date: 2016-10-19 13:08+0300\n"
+"PO-Revision-Date: 2017-04-06 00:21+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: el\n"
+
+#: search form strings --------------------------
+msgid "pickup_parking_name"
+msgstr "Σημείο παραλαβής"
+
+msgid "return_parking_name"
+msgstr "Σημείο επιστροφή"
+
+msgid "same_parking"
+msgstr "Επιστροφή στο ίδιο σημείο"
+
+msgid "pickup_date"
+msgstr "Ημερομηνία & ώρα παραλαβής"
+
+msgid "return_date"
+msgstr "Ημερομηνία & ώρα επιστροφής"
+
+msgid "search_button"
+msgstr "Αναζήτηση"
+
+#: search results page --------------------------
+msgid "change_dates"
+msgstr "ΑΛΛΑΓΗ ΗΜΕΡΟΜΗΝΙΩΝ"
+
+msgid "available_cars"
+msgstr "Διαθέσιμα οχήματα"
+
+msgid "from"
+msgstr "από"
+
+msgid "to"
+msgstr "έως"
+
+msgid "for"
+msgstr "για"
+
+msgid "brands"
+msgstr "ΜΑΡΚΕΣ"
+
+msgid "attributes"
+msgstr "ΧΑΡΑΚΤΗΡΙΣΤΙΚΑ"
+
+msgid "pickup"
+msgstr "ΠΑΡΑΛΑΒΗ"
+
+msgid "return"
+msgstr "ΕΠΙΣΤΡΟΦΗ"
+
+msgid "no_results"
+msgstr "Δεν βρέθηκαν αποτελέσματα!"
+
+msgid "button"
+msgstr "ΕΠΙΛΟΓΗ"
+
+msgid "sold_out"
+msgstr "Αυτό το όχημα είναι πιθανό σύντομα να μην είναι διαθέσιμο!"
+
+msgid "last_booking"
+msgstr "Τελευταίο όχημα διαθέσιμο για κράτηση!"
+
+#: Car & Extras revision page --------------------------
+msgid "your_choise"
+msgstr "Η επιλογή σας"
+
+msgid "pricing"
+msgstr "Ανάλυση κόστους"
+
+msgid "extras"
+msgstr "Επιπλέον υπηρεσίες"
+
+msgid "driver_details"
+msgstr "Στοιχεία οδηγού"
+
+msgid "login_label"
+msgstr "Παρακαλώ συνδεθείτε ή εγγραφείτε για να συνεχίσετε"
+
+msgid "login_button"
+msgstr "ΕΙΣΟΔΟΣ"
+
+msgid "register_button"
+msgstr "ΕΓΓΡΑΦΗ"
+
+msgid "full_name"
+msgstr "Ονοματεπώνυμο"
+
+msgid "phone"
+msgstr "Τηλέφωνο"
+
+msgid "flight_number"
+msgstr "Σχόλια για την κράτηση"
+
+msgid "total_cost"
+msgstr "Συνολικό κόστος"
+
+msgid "continue_button"
+msgstr "ΣΥΝΕΧΙΣΤΕ ΣΤΗΝ ΠΛΗΡΩΜΗ"
+
+msgid "terms_label"
+msgstr "Συμφωνώ με τους όρους και τις προύποθέσεις των επιλεχθέντων υπηρεσιών"
+
+msgid "flat_cost"
+msgstr "Κόστος ενοικίασης"
+
+#: Order Revision --------------------------
+msgid "action_required"
+msgstr "ΑΠΑΙΤΕΙΤΑΙ ΕΝΕΡΓΙΑ ΣΑΣ"
+
+msgid "reference_message"
+msgstr "Ο κωδικός της κράτησής σας είναι"
+
+msgid "paypal_message"
+msgstr "Ο κωδικός πληρωμής στο PAYPAL είναι"
+
+msgid "button_message"
+msgstr "Παρακαλώ πατήσετε το κουμπί ΠΛΗΡΩΜΗ για να εξοφλήσετε την κράτησή σας"
+
+msgid "payment_button"
+msgstr "ΠΛΗΡΩΜΗ"
+
+#: Payment --------------------------
+msgid "payment_success"
+msgstr "ΕΠΙΤΥΧΗΣ ΠΛΗΡΩΜΗ"
+
+msgid "success"
+msgstr "ΕΠΙΤΥΧΙΑ"
+
+msgid "success_message"
+msgstr "Η κράτησή σας έχει ολοκληρωθεί. Παρακαλώ ελέγξτε το email σας για επιβεβαίωση της κράτησης."
+
+msgid "payment_failure"
+msgstr "ΑΠΟΤΥΧΙΑ ΠΛΗΡΩΜΗΣ"
+
+msgid "failure"
+msgstr "ΑΠΟΤΥΧΙΑ"
+
+msgid "failure_message"
+msgstr "Δεν μπορέσαμε να κάνουμε πληρωμή για την συγκεκριμένη κράτηση. Παρακαλούμε προσπαθήστε ξανά ή επικοινωνήστε μαζί μας."

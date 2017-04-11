@@ -1,0 +1,297 @@
+<div class="row">
+	<div class = "change_dates text-center">
+		<a href="#" id="change_dates"> {{tr_change_dates}} </a>
+		{% if type == "activity" %}
+			<div class="col-sm-12 text-left search-form hidden">
+				<form action="{{searchResultsURL}}" class='wprengine-form'>
+					<input  name="pickup_coordinates" class="hidden" value = "{{ parkings[0].parking_coordinates }}">
+					<input  name="return_coordinates" class="hidden" value = "{{ parkings[0].parking_coordinates }}">
+					<input type="hidden" name="pickup_parking_name"  value = "{{ parkings[0].parking_name }}" >
+					<input type="hidden" name="return_parking_name" value = "{{ parkings[0].parking_name }}" >
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-3">
+								<label for="pickup_date">{{tr_pickup_date}}</label>
+								<div class="input-group date wppickupdate" id="datetimepicker1">
+									<input type="text" class="form-control" value="{{pickup_date_time}}" name="pickup_datetime">
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<label for="return_date">{{tr_adults}}</label>
+								<select class="form-control" name="adults" id="adults">
+									<option value="1" {% if adults == 1 %} selected="selected" {%endif%}>1 adult</option>
+									<option value="2" {% if adults == 2  %} selected="selected" {%endif%}>2 adults</option>
+									<option value="3" {% if adults == 3  %} selected="selected" {%endif%}>3 adults</option>
+									<option value="4" {% if adults == 4  %} selected="selected" {%endif%}>4 adults</option>
+									<option value="5" {% if adults == 5  %} selected="selected" {%endif%}>5 adults</option>
+									<option value="6" {% if adults == 6  %} selected="selected" {%endif%}>6 adults</option>
+									<option value="7" {% if adults == 7  %} selected="selected" {%endif%}>7 adults</option>
+									<option value="8" {% if adults == 8  %} selected="selected" {%endif%}>8 adults</option>
+									<option value="9" {% if adults == 9  %} selected="selected" {%endif%}>9 adults</option>
+									<option value="10"{% if adults == 10 %} selected="selected" {%endif%}>10 adults</option>
+								</select>
+							</div>
+							<div class="col-md-3">
+								<label for="return_date">{{tr_children}}</label>
+								<select class="form-control" name="child" id="child">
+									<option value="0" {% if children == 0 %} selected="selected" {%endif%}>Add children</option>
+									<option value="1" {% if children == 1 %} selected="selected" {%endif%}>1 child</option>
+									<option value="2" {% if children == 2 %} selected="selected" {%endif%}>2 children</option>
+									<option value="3" {% if children == 3 %} selected="selected" {%endif%}>3 children</option>
+									<option value="4" {% if children == 4 %} selected="selected" {%endif%}>4 children</option>
+									<option value="5" {% if children == 5 %} selected="selected" {%endif%}>5 children</option>
+									<option value="6" {% if children == 6 %} selected="selected" {%endif%}>6 children</option>
+									<option value="7" {% if children == 7 %} selected="selected" {%endif%}>7 children</option>
+									<option value="8" {% if children == 8 %} selected="selected" {%endif%}>8 children</option>
+									<option value="9" {% if children == 9 %} selected="selected" {%endif%}>9 children</option>
+									<option value="10"{% if children == 10 %} selected="selected" {%endif%}>10 children</option>
+								</select>
+							</div>
+							<div class="col-md-3">
+								<label for="return_date">{{tr_infants}}</label>
+								<select class="form-control" name="infants" id="infants">
+									<option value="0">Add infants</option>
+									<option value="1"{% if infants == 1 %} selected="selected" {%endif%}>1 infant</option>
+									<option value="2"{% if infants == 2 %} selected="selected" {%endif%}>2 infants</option>
+									<option value="3"{% if infants == 3 %} selected="selected" {%endif%}>3 infants</option>
+									<option value="4"{% if infants == 4 %} selected="selected" {%endif%}>4 infants</option>
+									<option value="5"{% if infants == 5 %} selected="selected" {%endif%}>5 infants</option>
+								</select>
+							</div>
+							<div class="form-group col-md-2">
+									<label>&nbsp;</label>
+									<button type="submit" class="btn btn-default form-control">{{tr_search_button}}</button>
+							</div>
+						</div>
+					</div>
+					<input type="hidden" id="calendar_mode" value="{{calendar_mode}}" name="calendar_mode">
+					<input type="hidden" id="calendar_view" value="{{calendar_view}}" name="calendar_view">
+					<input type="hidden" id="calendar_step" value="{{calendar_step}}" name="calendar_step">
+					<input type="hidden" id="calendar_hours" value="{{calendar_hours}}" name="calendar_hours">
+					<input type="hidden" id="placement" value="{{placement}}" name="placement">
+					<input type="hidden" id="slideMode" value="{{slideMode}}" name="slideMode">
+					<input type="hidden" id="group" value="{{group_id}}" name="group">
+					<input type="hidden" id="base_coordinates" value="{{base_coordinates}}" name="base_coordinates">
+					<input type="hidden" id="base_radius" value="{{base_radius}}" name="base_radius">
+					<input type="hidden" id="type" value="{{type}}" name="type">
+				</form>
+			</div>
+		{% else %}
+			<div class="col-sm-12 text-left search-form hidden">
+				<form action="{{searchResultsURL}}" class='wprengine-form'>
+					<div class="form-group row">
+					{% if hideLocations == "true" %}
+						<input  name="pickup_coordinates" class="hidden" value = "{{ parkings[0].parking_coordinates }}">
+						<input  name="return_coordinates" class="hidden" value = "{{ parkings[0].parking_coordinates }}">
+						<input type="hidden" name="pickup_parking_name"  value = "{{ parkings[0].parking_name }}" >
+						<input type="hidden" name="return_parking_name" value = "{{ parkings[0].parking_name }}" >
+					{% else %}
+						
+						{% if location_mode == "auto" %}
+							<div class="col-md-4">
+								<label for="pickup_coordinates">{{tr_pickup_parking_name}}</label>
+								<div class="input_wrapper">
+									<input id="prediction-input" class="prediction-input form-control" type="text" placeholder="{{tr_pickup_parking_name}}">
+									<input  name="pickup_coordinates" class="hidden">
+								</div>
+							</div>
+						{% else %}
+							<div class="col-md-4">
+								<label for="pickup_coordinates">{{tr_pickup_parking_name}}</label>
+								<select class="form-control" name="pickup_coordinates" id="pickup_coordinates">
+									{% for parking in parkings %}
+									<option value="{{parking.parking_coordinates}}">{{parking.parking_name}}</option>
+									{% else %}
+									<option value="" readonly>No Preset Parkings available</option>
+									{% endfor %}
+								</select>
+							</div>
+						{% endif %}
+						<input type="hidden" name="pickup_parking_name" >
+						<input type="hidden" name="return_parking_name" >
+					{% endif %}
+						<div class="col-md-3">
+							<label for="pickup_date">{{tr_pickup_date}}</label>
+							<div class="input-group date  wppickupdate" id="datetimepicker1">
+								<input type="text" class="form-control" value="{{pickup_date_time}}" name="pickup_datetime">
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<label for="return_date">{{tr_return_date}}</label>
+							<div class="input-group date  wppickupdate" id="datetimepicker2">
+								<input type="text" class="form-control" value="{{return_date_time}}" name="return_datetime">
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
+						</div>
+						<div class="col-md-2">
+						<label>&nbsp;</label>
+							<button type="submit" class="btn btn-default form-control">{{tr_search_button}}</button>
+						</div>
+					</div>
+					<div class="checkbox row">
+						<div class="col-md-4">
+							<label>
+								<input type="checkbox" name="same_return_parking" checked> {{tr_same_parking}}
+							</label>
+						</div>
+					</div>
+					<div class="form-group hidden return-group col-md-4">
+						{% if location_mode == "auto" %}
+							<div class="form-group hidden return-group">
+							<input id="prediction-input-return" class="prediction-input form-control" type="text" placeholder="Change return place" >
+							<input  name="return_coordinates" class="hidden">
+							</div>
+							<div class="clearfix"></div>
+						{% else %}
+							<label for="return_coordinates">{{tr_return_parking_name}}</label>
+							<select class="form-control" name="return_coordinates" id="return_coordinates">
+								{% for parking in parkings %}
+								<option value="{{parking.parking_coordinates}}">{{parking.parking_name}}</option>
+								{% else %}
+								<option value="" readonly>No Preset Parkings available</option>
+								{% endfor %}
+							</select>
+						{% endif %}
+					</div>
+					<ul id="prediction_results"></ul>
+
+					<input type="hidden" id="calendar_mode" value="{{calendar_mode}}" name="calendar_mode">
+					<input type="hidden" id="calendar_view" value="{{calendar_view}}" name="calendar_view">
+					<input type="hidden" id="calendar_step" value="{{calendar_step}}" name="calendar_step">
+					<input type="hidden" id="calendar_hours" value="{{calendar_hours}}" name="calendar_hours">
+					<input type="hidden" id="placement" value="{{placement}}" name="placement">
+					<input type="hidden" id="slideMode" value="{{slideMode}}" name="slideMode">
+					<input type="hidden" id="group" value="{{group_id}}" name="group">
+					<input type="hidden" id="base_coordinates" value="{{base_coordinates}}" name="base_coordinates">
+					<input type="hidden" id="base_radius" value="{{base_radius}}" name="base_radius">
+				</form>
+			</div>
+		</div>
+	{% endif %}
+	<div class="col-xs-12 text-center">
+		{% if type == "activity" %}
+			<h3>{{tr_available_activities}} {{tr_for}} {{pickupDateReadable}}</h3>
+		{% else %}
+			<h3>{{tr_available_cars}} {{tr_from}} {{pickupDateReadable}} {{tr_to}} {{returnDateReadable}}</h3>
+		{% endif %}
+		{% if hideLocations == "true" or type == "activity" %}
+			<h4 class="hidden">{{tr_pickup}} : {{pickupParking}} ({{pickupTime}}) -> {{tr_return}}: {{returnParking}} ({{returnTime}})</h4>
+		{% else %}
+			<h4>{{tr_pickup}} : {{pickupParking}} ({{pickupTime}}) -> {{tr_return}}: {{returnParking}} ({{returnTime}})</h4>
+		{% endif %}
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+		<ul class="list-inline hidden">
+			<li><a href="#">CATEGORY</a></li>
+			<li><a href="#">BRAND</a></li>
+			<li><a href="#">PRICE</a></li>
+		</ul>
+	</div>
+</div>
+{% set emptyRates = 'true' %}
+{% for service in services.data %}
+	{% if service.total_availability %}
+		{% set emptyRates = 'false' %}
+		<div class="result-item" >
+			<div class="row">
+				<div class="col-xs-12 col-md-3 text-center">
+				{% if service.media[0]  %}
+					<img style="max-width:170px;" src="{{service.media[0]}}" alt="{{service.title}}">
+				{% endif %}
+				</div>
+				<div class="col-xs-12 col-md-6">
+					<div class="service-name">{{service.title}}</div>
+					<div class="service-group">{{service.group.name}}</div>
+					<div class="service-attributes">
+						<ul class="list-inline">
+						{% for attribute in service.attributes %}
+							<li>
+								{{attribute.name}}: <strong>{{attribute.value}}</strong>,
+							</li>
+						{% endfor %}
+						</ul>
+					</div>
+					{% if service.description  %}
+						<div class="row">
+							<div class="service-attributes">
+							<div class="col-xs-3 black"><strong>{{tr_notes}}:</strong> </div>
+							<div class="col-xs-9">{{service.description}}</div>
+							</div>
+						</div>
+					{% endif %}
+					{% if service.includes  %}
+						<div class="row">
+							<div class="service-attributes">
+								<div class="col-xs-3 black"><strong>{{tr_includes}}:</strong> </div>
+								<div class="col-xs-9">{{service.includes}}</div>
+							</div>
+						</div>	
+					{% endif %}
+					{% if service.excludes  %}
+						<div class="row">
+							<div class="service-attributes">
+								<div class="col-xs-3 black"><strong>{{tr_excludes}}:</strong></div>
+								<div class="col-xs-9">{{service.excludes}}</div>
+							</div>
+						</div>		
+					{% endif %}
+
+					{% if service.availabilities_and_rates[0].availability <= 3 %}
+						<div class="service-low">{{tr_sold_out}}</div>
+					{% elseif service.availabilities_and_rates[0].availability <= 1 %} 
+						<div class="service-last">{{tr_last_booking}}}</div>
+					{% endif %}
+				</div>
+				<div class="col-xs-12 col-md-3 text-center ">
+
+					{% if service.availabilities_and_rates[0].offer[0].type != "" %}
+						{% for offer in service.availabilities_and_rates[0].offer|slice(0, 2) %}
+							{% if offer.offer_type == "discount" %}
+								<div class="service-offer">
+									<i class="fa fa-bell" aria-hidden="true"></i> {{ offer.type}}
+								</div>
+							{% else %}
+								<div class="service-offer-extra">
+									<i class="fa fa-bell" aria-hidden="true"></i> {{ offer.type}}
+								</div>
+							{% endif %}
+						{% endfor %}
+					{% endif %}
+					<div class="service-prices">
+						<span class = "currency">{{currency}}</span><span class="service-total">{{service.total_price}}</span> 
+						{% if type == "activity" %}
+							<div class="service-cost-day"> 
+								{{tr_for}} {{paxReadable}}
+							</div>
+						{% elseif hide_locations == true  %}
+							<div class="service-cost-day"> /div>
+						{% else %}	
+							<div class="service-cost-day"> 
+								{{tr_for}} {{timeDifferenceReadable}}
+							</div>
+						{% endif %}	
+					</div>
+					<div class="service-book">
+						<a href="{{detailsURL}}?{{queryString}}&amp;service_id={{service.id}}&amp;totalDays={{totalDays}}" class="book-button">{{tr_button}}</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endif %}	
+{% endfor %}
+{% if emptyRates == 'true' %}
+	<div class="col-md-12 text-center">
+		<h2>{{tr_no_results}}</h2>
+	</div>
+{% endif %}
+

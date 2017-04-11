@@ -1,0 +1,151 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: reservation-engine\n"
+"POT-Creation-Date: 2016-10-19 13:08+0300\n"
+"PO-Revision-Date: 2017-04-06 00:22+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en_US\n"
+
+#: search form strings --------------------------
+msgid "pickup_parking_name"
+msgstr "Pickup Parking"
+
+msgid "return_parking_name"
+msgstr "Return Parking"
+
+msgid "same_parking"
+msgstr "Same return parking"
+
+msgid "pickup_date"
+msgstr "Pickup Date & Time"
+
+msgid "return_date"
+msgstr "Return Date & Time"
+
+msgid "search_button"
+msgstr "Search"
+
+#: search results page --------------------------
+msgid "change_dates"
+msgstr "CHANGE DATES"
+
+msgid "available_cars"
+msgstr "Available vehicles"
+
+msgid "from"
+msgstr "from"
+
+msgid "to"
+msgstr "to"
+
+msgid "for"
+msgstr "For"
+
+msgid "brands"
+msgstr "BRANDS"
+
+msgid "attributes"
+msgstr "VEHICLE ATTRIBUTES"
+
+msgid "pickup"
+msgstr "PICKUP"
+
+msgid "return"
+msgstr "RETURN"
+
+msgid "no_results"
+msgstr "No results found!"
+
+msgid "button"
+msgstr "SELECT"
+
+msgid "sold_out"
+msgstr "This vehicle is going to sell out soon!"
+
+msgid "last_booking"
+msgstr "Last booking for this vehicle!"
+
+#: Car & Extras revision page --------------------------
+msgid "your_choise"
+msgstr "Your choise"
+
+msgid "pricing"
+msgstr "Pricing"
+
+msgid "extras"
+msgstr "Extras"
+
+msgid "driver_details"
+msgstr "Driver Details"
+
+msgid "login_label"
+msgstr "Please Login or Register to continue"
+
+msgid "login_button"
+msgstr "LOGIN"
+
+msgid "register_button"
+msgstr "REGISTER"
+
+msgid "full_name"
+msgstr "Full name"
+
+msgid "phone"
+msgstr "Phone"
+
+msgid "flight_number"
+msgstr "Comments"
+
+msgid "total_cost"
+msgstr "Total Cost"
+
+msgid "continue_button"
+msgstr "CONTINUE TO PAYMENT"
+
+msgid "terms_label"
+msgstr "I agree to have read the Terms of Service"
+
+msgid "flat_cost"
+msgstr "Flat rental cost"
+
+#: Order Revision --------------------------
+msgid "action_required"
+msgstr "ACTION REQUIRED"
+
+msgid "reference_message"
+msgstr "Your booking reference number is"
+
+msgid "paypal_message"
+msgstr "PAYPAL payment id is"
+
+msgid "button_message"
+msgstr "Please click on PAY NOW button to pay your booking"
+
+msgid "payment_button"
+msgstr "PAY NOW"
+
+#: Payment --------------------------
+msgid "payment_success"
+msgstr "PAYMENT SUCCESS"
+
+msgid "success"
+msgstr "SUCCESS"
+
+msgid "success_message"
+msgstr "Your reservation was succesfully submited. Please check your email for the confirmation"
+
+msgid "payment_failure"
+msgstr "PAYMENT FAILURE"
+
+msgid "failure"
+msgstr "FAILURE"
+
+msgid "failure_message"
+msgstr "Your reservation was failed. Please try again or contact us."

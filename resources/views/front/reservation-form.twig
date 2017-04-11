@@ -1,0 +1,176 @@
+<form action="{{searchResultsURL}}" class='wprengine-form'>
+	{% if type == "activity" %}
+		<input  name="pickup_coordinates" class="hidden" value = "{{ parkings[0].parking_coordinates }}">
+		<input  name="return_coordinates" class="hidden" value = "{{ parkings[0].parking_coordinates }}">
+		<input type="hidden" name="pickup_parking_name"  value = "{{ parkings[0].parking_name }}" >
+		<input type="hidden" name="return_parking_name" value = "{{ parkings[0].parking_name }}" >
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-3">
+					<label for="pickup_date">{{tr_pickup_date}}</label>
+					<div class="input-group date wppickupdate" id="datetimepicker1">
+						<input type="text" class="form-control" value="{{pickup_date_time}}" name="pickup_datetime">
+						<span class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span>
+						</span>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<label for="return_date">{{tr_adults}}</label>
+					<select class="form-control" name="adults" id="adults">
+						<option value="1">1 adult</option>
+						<option value="2">2 adults</option>
+						<option value="3">3 adults</option>
+						<option value="4">4 adults</option>
+						<option value="5">5 adults</option>
+						<option value="6">6 adults</option>
+						<option value="7">7 adults</option>
+						<option value="8">8 adults</option>
+						<option value="9">9 adults</option>
+						<option value="10">10 adults</option>
+					</select>
+				</div>
+				<div class="col-md-3">
+					<label for="return_date">{{tr_children}}</label>
+					<select class="form-control" name="child" id="child">
+						<option value="0">Add children</option>
+						<option value="1">1 child</option>
+						<option value="2">2 children</option>
+						<option value="3">3 children</option>
+						<option value="4">4 children</option>
+						<option value="5">5 children</option>
+						<option value="6">6 children</option>
+						<option value="7">7 children</option>
+						<option value="8">8 children</option>
+						<option value="9">9 children</option>
+						<option value="10">10 children</option>
+					</select>
+				</div>
+				<div class="col-md-3">
+					<label for="return_date">{{tr_infants}}</label>
+					<select class="form-control" name="infants" id="infants">
+						<option value="0">Add infants</option>
+						<option value="1">1 infant</option>
+						<option value="2">2 infants</option>
+						<option value="3">3 infants</option>
+						<option value="4">4 infants</option>
+						<option value="5">5 infants</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	{% else %}
+		{% if hideLocations == "true" %}
+			<input  name="pickup_coordinates" class="hidden" value = "{{ parkings[0].parking_coordinates }}">
+			<input  name="return_coordinates" class="hidden" value = "{{ parkings[0].parking_coordinates }}">
+			<input type="hidden" name="pickup_parking_name"  value = "{{ parkings[0].parking_name }}" >
+			<input type="hidden" name="return_parking_name" id="return_parking_name" value = "{{ parkings[0].parking_name }}" >
+		{% else %}
+			{% if location_mode == "auto" %}
+			<div class="layer visible form-group" id="affiliate_select">
+				<div class="controls_wrapper">
+					<div class="icon_wrapper"></div>
+					<a href="#" class="clear_input"></a>
+					<div class="input_wrapper">
+						<input id="prediction-input" class="prediction-input form-control" type="text" placeholder="{{tr_pickup_parking_name}}">
+						<input  name="pickup_coordinates" class="hidden">
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" name="same_return_parking" checked> {{tr_same_parking}}
+						</label>
+					</div>
+					<div class="form-group hidden return-group">
+						<input id="prediction-input-return" class="prediction-input form-control" type="text" placeholder="Change return place" >
+						<input  name="return_coordinates" class="hidden">
+					</div>
+					<div class="clearfix"></div>
+					<ul id="prediction_results"></ul>
+				</div>
+			</div>
+			{% else %}
+				<div class="form-group">
+					{% if current_mode == "true" %}
+						<div id="getPickupLocation" class="location-icon"> 
+							<a href="" alt="Get current location"> 
+								<i class="fa fa-location-arrow" aria-hidden="true"></i>
+							</a>
+						</div>
+					{% endif %}
+					<label for="pickup_coordinates">{{tr_pickup_parking_name}}</label>
+					<select class="form-control" name="pickup_coordinates" id="pickup_coordinates">
+						{% for parking in parkings %}
+						<option value="{{parking.parking_coordinates}}">{{parking.parking_name}}</option>
+						{% else %}
+						<option value="" readonly>No Preset Parkings available</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" name="same_return_parking" checked> {{tr_same_parking}}
+					</label>
+				</div>
+				<div class="form-group hidden return-group">
+					{% if current_mode == "true" %}
+						<div id="getReturnLocation" class="location-icon"> 
+							<a href="" alt="Get current location"> 
+								<i class="fa fa-location-arrow" aria-hidden="true"></i>
+							</a>
+						</div>
+					{% endif %}
+					<label for="return_coordinates">{{tr_return_parking_name}}</label>
+					<select class="form-control" name="return_coordinates" id="return_coordinates">
+						{% for parking in parkings %}
+						<option value="{{parking.parking_coordinates}}">{{parking.parking_name}}</option>
+						{% else %}
+						<option value="" readonly>No Preset Parkings available</option>
+						{% endfor %}
+					</select>
+				</div>
+			{% endif %}
+			<input type="hidden" name="pickup_parking_name" >
+			<input type="hidden" name="return_parking_name" >
+		{% endif %}
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-6">
+					<label for="pickup_date">{{tr_pickup_date}}</label>
+					<div class="input-group date wppickupdate" id="datetimepicker1">
+						<input type="text" class="form-control" value="{{pickup_date_time}}" name="pickup_datetime">
+						<span class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span>
+						</span>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label for="return_date">{{tr_return_date}}</label>
+					<div class="input-group date wpreturndate" id="datetimepicker2">
+						<input type="text" class="form-control" value="{{return_date_time}}" name="return_datetime">
+						<span class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+
+
+	<div class="form-group">
+		<button type="submit" class="btn btn-default">{{tr_search_button}}</button>
+	</div>
+	
+	<input type="hidden" id="calendar_mode" value="{{calendar_mode}}" name="calendar_mode">
+	<input type="hidden" id="calendar_view" value="{{calendar_view}}" name="calendar_view">
+	<input type="hidden" id="calendar_step" value="{{calendar_step}}" name="calendar_step">
+	<input type="hidden" id="calendar_hours" value="{{calendar_hours}}" name="calendar_hours">
+	<input type="hidden" id="placement" value="{{placement}}" name="placement">
+	<input type="hidden" id="slideMode" value="{{slideMode}}" name="slideMode">
+	<input type="hidden" id="group" value="{{group_id}}" name="group">
+	<input type="hidden" id="type" value="{{type}}" name="type">
+	<input type="hidden" id="base_coordinates" value="{{base_coordinates}}" name="base_coordinates">
+	<input type="hidden" id="base_radius" value="{{base_radius}}" name="base_radius">
+	<input type="hidden" id="hideLocations" value="{{hideLocations}}" name="hideLocations">
+
+</form>
