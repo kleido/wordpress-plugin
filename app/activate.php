@@ -14,7 +14,7 @@ use Herbert\Framework\Notifier;
 
 // The form page
 
-$slug = 'wp-rengine-form';
+$slug = 'workadu-form';
 $args = [
 	'name'        => $slug,
 	'post_type'   => 'page',
@@ -25,22 +25,22 @@ $thePage = get_posts($args);
 
 $searchPageParams = [
 	'ID'           => ($thePage) ? $thePage[0]->ID : '',
-	'post_content' => '[WPRengineForm]',
-	'post_title'   => 'WP Rengine - Form',
+	'post_content' => '[WorkaduForm]',
+	'post_title'   => 'Workadu - Form',
 	'post_status'  => 'publish',
 	'post_type'    => 'page',
-	'post_name'    => 'wp-rengine-form',
+	'post_name'    => 'workadu-form',
 ];
 $result = wp_insert_post($searchPageParams, true);
 if ($result == 0 || get_class($result) == 'WP_Error') {
-	Notifier::error('WP Rengine could not create the search results page.');
+	Notifier::error('Workadu could not create the search results page.');
 } else {
-	Notifier::success('The WP Rengine results page was successfully created.');
+	Notifier::success('Workadu results page was successfully created.');
 }
 
 // 1 - the search page
 
-$slug = 'wp-rengine-search-results';
+$slug = 'workadu-search-results';
 $args = [
 	'name'        => $slug,
 	'post_type'   => 'page',
@@ -51,22 +51,22 @@ $thePage = get_posts($args);
 
 $searchPageParams = [
 	'ID'           => ($thePage) ? $thePage[0]->ID : '',
-	'post_content' => '[wp-rengine-search-results]',
-	'post_title'   => 'WP Rengine - Search Results',
+	'post_content' => '[Workadu-search-results]',
+	'post_title'   => 'Workadu - Search Results',
 	'post_status'  => 'publish',
 	'post_type'    => 'page',
-	'post_name'    => 'wp-rengine-search-results',
+	'post_name'    => 'workadu-search-results',
 ];
 $result = wp_insert_post($searchPageParams, true);
 if ($result == 0 || get_class($result) == 'WP_Error') {
-	Notifier::error('WP Rengine could not create the search results page.');
+	Notifier::error('Workadu could not create the search results page.');
 } else {
-	Notifier::success('The WP Rengine results page was successfully created.');
+	Notifier::success('Workadu results page was successfully created.');
 }
 
 // 2 - the car details / extras page
 
-$slug = 'wp-rengine-car-driver-details';
+$slug = 'workadu-contact-info';
 $args = [
 	'name'        => $slug,
 	'post_type'   => 'page',
@@ -77,23 +77,23 @@ $thePage = get_posts($args);
 
 $carAndDriverDetailsPageParams = [
 	'ID'           => ($thePage) ? $thePage[0]->ID : '',
-	'post_content' => '[wp-rengine-car-driver-details]',
-	'post_title'   => 'WP Rengine - Car and Driver details',
+	'post_content' => '[Workadu-contact-info]',
+	'post_title'   => 'Workadu - Contact info',
 	'post_status'  => 'publish',
 	'post_type'    => 'page',
-	'post_name'    => 'wp-rengine-car-driver-details',
+	'post_name'    => 'workadu-contact-info',
 ];
 
 $result = wp_insert_post($carAndDriverDetailsPageParams, true);
 if ($result == 0 || get_class($result) == 'WP_Error') {
-	Notifier::error('WP Rengine could not create the car and driver details page.');
+	Notifier::error('Workadu could not create the car and driver details page.');
 }  else {
-	Notifier::success('The WP Rengine car and driver details page was successfully created.');
+	Notifier::success('Workadu car and driver details page was successfully created.');
 }
 
 // 3 - the order revision page
 
-$slug = 'wp-rengine-order-revision';
+$slug = 'workadu-order-revision';
 $args = [
 	'name'        => $slug,
 	'post_type'   => 'page',
@@ -104,18 +104,18 @@ $thePage = get_posts($args);
 
 $orderRevisionPageParams = [
 	'ID'           => ($thePage) ? $thePage[0]->ID : '',
-	'post_content' => '[wp-rengine-order-revision]',
-	'post_title'   => 'WP Rengine - Order Revision',
+	'post_content' => '[Workadu-order-revision]',
+	'post_title'   => 'Workadu - Order Revision',
 	'post_status'  => 'publish',
 	'post_type'    => 'page',
-	'post_name'    => 'wp-rengine-order-revision',
+	'post_name'    => 'workadu-order-revision',
 ];
 
 $result = wp_insert_post($orderRevisionPageParams, true);
 if ($result == 0 || get_class($result) == 'WP_Error') {
-	Notifier::error('WP Rengine could not create the order revision page.');
+	Notifier::error('Workadu could not create the order revision page.');
 }  else {
-	Notifier::success('The WP Rengine order revision page was successfully created.');
+	Notifier::success('Workadu order revision page was successfully created.');
 }
 
 // 4 - the payment results page (success & fail)
@@ -131,16 +131,18 @@ $thePage = get_posts($args);
 
 $paymentPageParams = [
 	'ID'           => ($thePage) ? $thePage[0]->ID : '',
-	'post_content' => '[wp-rengine-payment]',
-	'post_title'   => 'WP Rengine - Payment Result',
+	'post_content' => '[Workadu-payment]',
+	'post_title'   => 'Workadu - Payment Result',
 	'post_status'  => 'publish',
 	'post_type'    => 'page',
-	'post_name'    => 'wp-rengine-payment',
+	'post_name'    => 'workadu-payment',
 ];
 
 $result = wp_insert_post($paymentPageParams, true);
 if ($result == 0 || get_class($result) == 'WP_Error') {
-	Notifier::error('WP Rengine could not create the payment page.');
+	Notifier::error('Workadu could not create the payment page.');
 } else {
-	Notifier::success('The WP Rengine payment page was successfully created.');
+	Notifier::success('The Workadu payment page was successfully created.');
 }
+
+

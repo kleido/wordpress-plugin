@@ -1,8 +1,8 @@
 <div class="row">
-	<div class = "change_dates text-center">
+	<div class = "change_dates col-md-12 text-center">
 		<a href="#" id="change_dates"> {{tr_change_dates}} </a>
 		{% if type == "activity" %}
-			<div class="col-sm-12 text-left search-form hidden">
+			<div class="col-sm-12 text-left wprengine-results-form">
 				<form action="{{searchResultsURL}}" class='wprengine-form'>
 					<input  name="pickup_coordinates" class="hidden" value = "{{ parkings[0].parking_coordinates }}">
 					<input  name="return_coordinates" class="hidden" value = "{{ parkings[0].parking_coordinates }}">
@@ -15,7 +15,7 @@
 								<div class="input-group date wppickupdate" id="datetimepicker1">
 									<input type="text" class="form-control" value="{{pickup_date_time}}" name="pickup_datetime">
 									<span class="input-group-addon">
-										<span class="glyphicon glyphicon-calendar"></span>
+										<i class="fa fa-calendar-check-o" aria-hidden="true"></i>
 									</span>
 								</div>
 							</div>
@@ -61,9 +61,9 @@
 									<option value="5"{% if infants == 5 %} selected="selected" {%endif%}>5 infants</option>
 								</select>
 							</div>
-							<div class="form-group col-md-2">
-									<label>&nbsp;</label>
-									<button type="submit" class="btn btn-default form-control">{{tr_search_button}}</button>
+							<div class="form-group col-md-3">
+
+									<button type="submit" class="search-button btn btn-default btn-secondary form-control" id="load" data-loading-text='{{tr_loading}}' >{{tr_search_button}}</button>
 							</div>
 						</div>
 					</div>
@@ -80,61 +80,64 @@
 				</form>
 			</div>
 		{% else %}
-			<div class="col-sm-12 text-left search-form hidden">
+			<div class="col-sm-12 text-left wprengine-results-form">
 				<form action="{{searchResultsURL}}" class='wprengine-form'>
 					<div class="form-group row">
-					{% if hideLocations == "true" %}
-						<input  name="pickup_coordinates" class="hidden" value = "{{ parkings[0].parking_coordinates }}">
-						<input  name="return_coordinates" class="hidden" value = "{{ parkings[0].parking_coordinates }}">
-						<input type="hidden" name="pickup_parking_name"  value = "{{ parkings[0].parking_name }}" >
-						<input type="hidden" name="return_parking_name" value = "{{ parkings[0].parking_name }}" >
-					{% else %}
-						
-						{% if location_mode == "auto" %}
-							<div class="col-md-4">
-								<label for="pickup_coordinates">{{tr_pickup_parking_name}}</label>
-								<div class="input_wrapper">
-									<input id="prediction-input" class="prediction-input form-control" type="text" placeholder="{{tr_pickup_parking_name}}">
-									<input  name="pickup_coordinates" class="hidden">
-								</div>
-							</div>
+						{% if hideLocations == "true" %}
+							<input  name="pickup_coordinates" class="hidden" value = "{{ parkings[0].parking_coordinates }}">
+							<input  name="return_coordinates" class="hidden" value = "{{ parkings[0].parking_coordinates }}">
+							<input type="hidden" name="pickup_parking_name"  value = "{{ parkings[0].parking_name }}" >
+							<input type="hidden" name="return_parking_name" value = "{{ parkings[0].parking_name }}" >
 						{% else %}
-							<div class="col-md-4">
-								<label for="pickup_coordinates">{{tr_pickup_parking_name}}</label>
-								<select class="form-control" name="pickup_coordinates" id="pickup_coordinates">
-									{% for parking in parkings %}
-									<option value="{{parking.parking_coordinates}}">{{parking.parking_name}}</option>
-									{% else %}
-									<option value="" readonly>No Preset Parkings available</option>
-									{% endfor %}
-								</select>
-							</div>
+							
+							{% if location_mode == "auto" %}
+								<div class="col-md-12 col-xl-4">
+									<label for="pickup_coordinates">{{tr_pickup_parking_name}}</label>
+									<div class="input_wrapper">
+										<input id="prediction-input" class="prediction-input form-control" type="text" placeholder="{{tr_pickup_parking_name}}">
+										<input  name="pickup_coordinates" class="hidden">
+									</div>
+								</div>
+							{% else %}
+								<div class="col-md-12 col-xl-4">
+									<label for="pickup_coordinates">{{tr_pickup_parking_name}}</label>
+									<select class="form-control" name="pickup_coordinates" id="pickup_coordinates">
+										{% for parking in parkings %}
+										<option value="{{parking.parking_coordinates}}">{{parking.parking_name}}</option>
+										{% else %}
+										<option value="" readonly>No Preset Parkings available</option>
+										{% endfor %}
+									</select>
+								</div>
+							{% endif %}
+							<input type="hidden" name="pickup_parking_name" >
+							<input type="hidden" name="return_parking_name" >
 						{% endif %}
-						<input type="hidden" name="pickup_parking_name" >
-						<input type="hidden" name="return_parking_name" >
-					{% endif %}
-						<div class="col-md-3">
+						<div class="col-md-6 col-xl-3">
 							<label for="pickup_date">{{tr_pickup_date}}</label>
 							<div class="input-group date  wppickupdate" id="datetimepicker1">
 								<input type="text" class="form-control" value="{{pickup_date_time}}" name="pickup_datetime">
 								<span class="input-group-addon">
-									<span class="glyphicon glyphicon-calendar"></span>
+									<i class="fa fa-calendar-check-o" aria-hidden="true"></i>
 								</span>
 							</div>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-6 col-xl-3">
 							<label for="return_date">{{tr_return_date}}</label>
 							<div class="input-group date  wppickupdate" id="datetimepicker2">
 								<input type="text" class="form-control" value="{{return_date_time}}" name="return_datetime">
 								<span class="input-group-addon">
-									<span class="glyphicon glyphicon-calendar"></span>
+									<i class="fa fa-calendar-check-o" aria-hidden="true"></i>
 								</span>
 							</div>
 						</div>
-						<div class="col-md-2">
-						<label>&nbsp;</label>
-							<button type="submit" class="btn btn-default form-control">{{tr_search_button}}</button>
-						</div>
+						{% if coupon_mode == 'show' %}
+							<div class="col-md-2">
+								<label for="coupon_code">{{tr_coupon_code}}</label>
+								<input type="text" class="form-control" name="coupon" value = "{{coupon}}" > 
+							</div>
+						{% endif %}
+						
 					</div>
 					<div class="checkbox row">
 						<div class="col-md-4">
@@ -143,26 +146,37 @@
 							</label>
 						</div>
 					</div>
-					<div class="form-group hidden return-group col-md-4">
+				
+					<div class="row col-md-4">
 						{% if location_mode == "auto" %}
-							<div class="form-group hidden return-group">
-							<input id="prediction-input-return" class="prediction-input form-control" type="text" placeholder="Change return place" >
-							<input  name="return_coordinates" class="hidden">
+							<div class="form-group return-group">
+								<input id="prediction-input-return" class="prediction-input form-control" type="text" placeholder="Change return place" >
+								<input  name="return_coordinates" class="hidden">
 							</div>
 							<div class="clearfix"></div>
 						{% else %}
-							<label for="return_coordinates">{{tr_return_parking_name}}</label>
-							<select class="form-control" name="return_coordinates" id="return_coordinates">
-								{% for parking in parkings %}
-								<option value="{{parking.parking_coordinates}}">{{parking.parking_name}}</option>
-								{% else %}
-								<option value="" readonly>No Preset Parkings available</option>
-								{% endfor %}
-							</select>
+							<div class="return-group" >
+								<label for="return_coordinates">{{tr_return_parking_name}}</label>
+								<select class="form-control" name="return_coordinates" id="return_coordinates">
+									{% for parking in parkings %}
+									<option value="{{parking.parking_coordinates}}">{{parking.parking_name}}</option>
+									{% else %}
+									<option value="" readonly>No Preset Parkings available</option>
+									{% endfor %}
+								</select>
+							</div>
 						{% endif %}
 					</div>
-					<ul id="prediction_results"></ul>
-
+					{% if location_mode == "auto" %}
+					<div class="row col-md-12">
+						<ul id="prediction_results"></ul>
+					</div>
+					{% endif %}
+					<div class="row">
+						<div class="col-md-3 col-md-offset-9 submitbutton">
+							<button type="submit" class="search-button tright  btn btn-default btn-secondary form-control" id="load" data-loading-text='{{tr_loading}}' >{{tr_search_button}}</button>
+						</div>
+					</div>
 					<input type="hidden" id="calendar_mode" value="{{calendar_mode}}" name="calendar_mode">
 					<input type="hidden" id="calendar_view" value="{{calendar_view}}" name="calendar_view">
 					<input type="hidden" id="calendar_step" value="{{calendar_step}}" name="calendar_step">
@@ -176,7 +190,7 @@
 			</div>
 		</div>
 	{% endif %}
-	<div class="col-xs-12 text-center">
+	<div class="col-md-12 text-center">
 		{% if type == "activity" %}
 			<h3>{{tr_available_activities}} {{tr_for}} {{pickupDateReadable}}</h3>
 		{% else %}
@@ -189,38 +203,37 @@
 		{% endif %}
 	</div>
 </div>
-<div class="row">
-	<div class="col-xs-12">
-		<ul class="list-inline hidden">
-			<li><a href="#">CATEGORY</a></li>
-			<li><a href="#">BRAND</a></li>
-			<li><a href="#">PRICE</a></li>
-		</ul>
-	</div>
-</div>
+
 {% set emptyRates = 'true' %}
 {% for service in services.data %}
-	{% if service.total_availability %}
+	{% if results_available_mode == 'true' or service.total_availability %}
 		{% set emptyRates = 'false' %}
 		<div class="result-item" >
 			<div class="row">
 				<div class="col-xs-12 col-md-3 text-center">
-				{% if service.media[0]  %}
-					<img style="max-width:170px;" src="{{service.media[0]}}" alt="{{service.title}}">
+				{% if (service.media|last)  %}
+					<img style="max-width:170px;" src="{{service.media|last}}" alt="{{service.title}}">
 				{% endif %}
 				</div>
-				<div class="col-xs-12 col-md-6">
+				<div class="col-xs-12 col-md-5">
 					<div class="service-name">{{service.title}}</div>
 					<div class="service-group">{{service.group.name}}</div>
 					<div class="service-attributes">
 						<ul class="list-inline">
 						{% for attribute in service.attributes %}
-							<li>
-								{{attribute.name}}: <strong>{{attribute.value}}</strong>,
-							</li>
+							{% if loop.last %}
+								<li>
+									{{attribute.value}} {{attribute.name}}
+								</li>
+							{% else %}
+								<li>
+									{{attribute.value}} {{attribute.name}} |
+								</li>
+							{% endif %}
 						{% endfor %}
 						</ul>
 					</div>
+					
 					{% if service.description  %}
 						<div class="row">
 							<div class="service-attributes">
@@ -251,11 +264,12 @@
 					{% elseif service.availabilities_and_rates[0].availability <= 1 %} 
 						<div class="service-last">{{tr_last_booking}}}</div>
 					{% endif %}
+
 				</div>
-				<div class="col-xs-12 col-md-3 text-center ">
+				<div class="col-xs-12 col-md-4 text-center ">
 
 					{% if service.availabilities_and_rates[0].offer[0].type != "" %}
-						{% for offer in service.availabilities_and_rates[0].offer|slice(0, 2) %}
+						{% for offer in service.availabilities_and_rates[0].offer|slice(0, 10) %}
 							{% if offer.offer_type == "discount" %}
 								<div class="service-offer">
 									<i class="fa fa-bell" aria-hidden="true"></i> {{ offer.type}}
@@ -267,27 +281,107 @@
 							{% endif %}
 						{% endfor %}
 					{% endif %}
-					<div class="service-prices">
-						<span class = "currency">{{currency}}</span><span class="service-total">{{service.total_price}}</span> 
-						{% if type == "activity" %}
-							<div class="service-cost-day"> 
-								{{tr_for}} {{paxReadable}}
-							</div>
-						{% elseif hide_locations == true  %}
-							<div class="service-cost-day"> /div>
-						{% else %}	
-							<div class="service-cost-day"> 
-								{{tr_for}} {{timeDifferenceReadable}}
-							</div>
-						{% endif %}	
-					</div>
-					<div class="service-book">
-						<a href="{{detailsURL}}?{{queryString}}&amp;service_id={{service.id}}&amp;totalDays={{totalDays}}" class="book-button">{{tr_button}}</a>
-					</div>
+					{% if service.total_availability %}
+						<div class="service-prices">
+							<span class = "currency">{{currency}}</span><span class="service-total">{{service.total_price}}</span> 
+							{% if type == "activity" %}
+								<div class="service-cost-day"> 
+									{{tr_for}} {{paxReadable}}
+								</div>
+							{% elseif hide_locations == true  %}
+								<div class="service-cost-day"> /div>
+							{% else %}	
+								<div class="service-cost-day"> 
+									{{tr_for}} {{timeDifferenceReadable}}
+								</div>
+							{% endif %}	
+						</div>
+					
+						<div class="service-book">
+							<a href="{{detailsURL}}?{{queryString}}&amp;service_id={{service.id}}&amp;totalDays={{totalDays}}" class="book-button" id="load" data-loading-text='{{tr_loading}} <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>'>{{tr_button}}</a>
+							{% if paymenetPercent > 0 and paymenetPercent < 100 %}
+								<div class="paynow-search"> {{ tr_paynow }}: {{currency}}{{ (service.total_price * (paymenetPercent / 100))|number_format(2)}}  </div>
+							{% endif %}
+							{% if cash == "on" %}
+								<div class="cash-search"> {{ tr_cash }} </div>
+							{% endif %}
+						</div>
+					{% endif %}	
+
 				</div>
 			</div>
+			{% if results_calendar_mode == 'display' %}
+				<div class="row">
+					<div class="col-md-12"> 
+						<div class="calendar">
+							<div class="col-xs-12 calendar-period text-center">{{startOfWeek}} - {{endOfPeriod}}</div>
+							<div class="col-xs-12 days"> 
+								{% for i in 0..6  %}
+									{% if service.availabilites[i].weekday==5 or service.availabilites[i].weekday==6 %}
+										<div class="text-center day-cell-title col-cell weekend"> {{service.availabilites[i].weekdayname}} </div>
+									{% else %}
+										<div class="text-center day-cell-title col-cell "> {{service.availabilites[i].weekdayname}} </div>
+									{% endif %}
+								{% endfor %}
+								<span class="hidden-xs">
+									{% for i in 0..6  %}
+										{% if service.availabilites[i].weekday==5 or service.availabilites[i].weekday==6 %}
+											<div class="text-center day-cell-title col-cell weekend"> {{service.availabilites[i].weekdayname}} </div>
+										{% else %}
+											<div class="text-center day-cell-title col-cell "> {{service.availabilites[i].weekdayname}} </div>
+										{% endif %}
+									{% endfor %}
+								</span>
+								{% for i in 0..27  %}
+									{% if date(service.availabilites[i].date)|date("YYYY-mm-dd")>=date(pickup_date_time)|date("YYYY-mm-dd") and date(service.availabilites[i].date)|date("YYYY-mm-dd") <= date(return_date_time)|date("YYYY-mm-dd") %}
+										{% if date(service.availabilites[i].date)|date("YYYY-mm-dd")==date(pickup_date_time)|date("YYYY-mm-dd") %}
+											{% if service.total_availability %}
+												<div class="text-center day-cell col-cell selected-period start"> 
+													<a href="#" data-date="{{service.availabilites[i].date}}" data-days={{timeDifferenceReadable[:2]}}>{{service.availabilites[i].day}}</a>
+												</div>
+											{% else %}
+												<div class="text-center day-cell col-cell selected-period-no-avail start"> 
+													{{service.availabilites[i].day}}
+												</div>
+											{% endif %}
+										{% elseif date(service.availabilites[i].date)|date("YYYY-mm-dd") == date(return_date_time)|date("YYYY-mm-dd")%}
+											{% if service.total_availability %}
+												<div class="text-center day-cell col-cell selected-period end"> 
+													<a href="#" data-date="{{service.availabilites[i].date}}" data-days={{timeDifferenceReadable[:2]}}>{{service.availabilites[i].day}}</a>
+												</div>
+											{% else %}
+												<div class="text-center day-cell col-cell selected-period-no-avail end"> 
+													{{service.availabilites[i].day}}
+												</div>
+											{% endif %}
+										{% else %}
+											{% if service.total_availability %}
+												<div class="text-center day-cell col-cell selected-period"> 
+													<a href="#" data-date="{{service.availabilites[i].date}}" data-days={{timeDifferenceReadable[:2]}}>{{service.availabilites[i].day}}</a>
+												</div>
+											{% else %}
+												<div class="text-center day-cell col-cell selected-period-no-avail"> 
+													{{service.availabilites[i].day}}
+												</div>
+											{% endif %}
+										{%endif %}
+									{% else %}
+										<div class="text-center day-cell col-cell">
+											{%if service.availabilites[i].value > 0 %} 
+												<a href="#" data-date="{{service.availabilites[i].date}}" data-days={{timeDifferenceReadable[:2]}}>{{service.availabilites[i].day}}</a>
+											{% else %}
+												{{service.availabilites[i].day}}
+											{%endif%}
+										</div>
+									{% endif %}
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				</div>
+			{%endif%}
 		</div>
-	{% endif %}	
+	{%endif%}
 {% endfor %}
 {% if emptyRates == 'true' %}
 	<div class="col-md-12 text-center">

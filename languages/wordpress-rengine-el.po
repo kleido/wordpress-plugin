@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wordpress-rengine-el\n"
 "POT-Creation-Date: 2016-10-19 13:08+0300\n"
-"PO-Revision-Date: 2017-04-11 16:54+0300\n"
+"PO-Revision-Date: 2019-02-21 15:22+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,19 +15,19 @@ msgstr ""
 
 #: search form strings --------------------------
 msgid "pickup_parking_name"
-msgstr "Σημείο παραλαβής"
+msgstr "Σημείο έναρξης"
 
 msgid "return_parking_name"
-msgstr "Σημείο επιστροφή"
+msgstr "Σημείο λήξης"
 
 msgid "same_parking"
 msgstr "Επιστροφή στο ίδιο σημείο"
 
 msgid "pickup_date"
-msgstr "Ημερομηνία & ώρα παραλαβής"
+msgstr "Ημερομηνία & ώρα έναρξης"
 
 msgid "return_date"
-msgstr "Ημερομηνία & ώρα επιστροφής"
+msgstr "Ημερομηνία τερματισμού"
 
 msgid "search_button"
 msgstr "Αναζήτηση"
@@ -37,7 +37,7 @@ msgid "change_dates"
 msgstr "ΑΛΛΑΓΗ ΗΜΕΡΟΜΗΝΙΩΝ"
 
 msgid "available_cars"
-msgstr "Διαθέσιμα οχήματα"
+msgstr "Διαθέσιμες υπηρεσίες"
 
 msgid "from"
 msgstr "από"
@@ -55,22 +55,22 @@ msgid "attributes"
 msgstr "ΧΑΡΑΚΤΗΡΙΣΤΙΚΑ"
 
 msgid "pickup"
-msgstr "ΠΑΡΑΛΑΒΗ"
+msgstr "ΕΝΑΡΞΗ"
 
 msgid "return"
-msgstr "ΕΠΙΣΤΡΟΦΗ"
+msgstr "ΛΗΞΗ"
 
 msgid "no_results"
-msgstr "Δεν βρέθηκαν αποτελέσματα!"
+msgstr "Δεν βρέθηκαν αποτελέσματα! Παρακαλούμε δοκιμάστε νέα αναζήτηση με άλλες ημερομηνίες."
 
 msgid "button"
 msgstr "ΕΠΙΛΟΓΗ"
 
 msgid "sold_out"
-msgstr "Αυτό το όχημα είναι πιθανό σύντομα να μην είναι διαθέσιμο!"
+msgstr "Αυτή η υπηρεσία είναι πιθανό σύντομα να μην είναι διαθέσιμη!"
 
 msgid "last_booking"
-msgstr "Τελευταίο όχημα διαθέσιμο για κράτηση!"
+msgstr "Τελευταία διαθέσιμη υπηρεσίας για κράτηση!"
 
 #: Car & Extras revision page --------------------------
 msgid "your_choise"
@@ -115,6 +115,12 @@ msgstr "Συμφωνώ με τους όρους και τις προύποθέσ
 msgid "flat_cost"
 msgstr "Κόστος ενοικίασης"
 
+msgid "selected_services"
+msgstr "Επιλεγμένες υπηρεσίες"
+
+msgid "comment_placeholder"
+msgstr "Παρακαλούμε πληρκτρολογείστε το όνομα του ξενοδοχείου ή του σημείου συνάντησης. Σε περίπτωση όπου αυτό είναι αεροδρόμιο ή λιμάνι πληρκτρολογείστε την πτήση/το όνομα του πλοίου/ή δρομολόγιο τραίνου. "
+
 #: Order Revision --------------------------
 msgid "action_required"
 msgstr "ΑΠΑΙΤΕΙΤΑΙ ΕΝΕΡΓΙΑ ΣΑΣ"
@@ -149,3 +155,37 @@ msgstr "ΑΠΟΤΥΧΙΑ"
 
 msgid "failure_message"
 msgstr "Δεν μπορέσαμε να κάνουμε πληρωμή για την συγκεκριμένη κράτηση. Παρακαλούμε προσπαθήστε ξανά ή επικοινωνήστε μαζί μας."
+
+#: New entries --------------------------
+msgid "coupon_code"
+msgstr "Kουπόνι"
+
+msgid "group_mode"
+msgstr "Επιλέξτε κατηγορία"
+
+msgid "cash_button"
+msgstr "Πληρωμή κατά την παράδοση(δεν απαιτείται τώρα)"
+
+msgid "cash_button_dscr"
+msgstr "Θα λάβετε επιβεβαιωτικό email για την επιβεβαίωση της κράτησής σας. Θα σας ζήτηθεί επίσης πιστωτική κάρτα κατά την έναρξη της μίσθωσης."
+
+msgid "cash_search_label"
+msgstr "ή πληρώστε αργότερα"
+
+msgid "No"
+msgstr "Όχι"
+
+msgid "Yes"
+msgstr "Ναί"
+
+msgid "last_step"
+msgstr "τελευταίο βήμα"
+
+msgid "default"
+msgstr "περιλαμβάνεται"
+
+msgid "pay_now"
+msgstr "Πληρώστε τώρα"
+
+msgid "pay_now_dscr"
+msgstr "από το συνολικό ποσό και το υπόλοιπο κατά την παράδοση!"

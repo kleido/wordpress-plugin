@@ -1,30 +1,223 @@
 .wp-rengine-admin {
-	padding: 10px;
+	margin: 10px;
+  box-shadow: 0 0 0 1px rgba(200,215,225, .5), 0 1px 2px #e9eff3;
 }
 .wp-rengine-admin .container {
 	background-color: #fff;
 	width: 100%;
 }
+
+.wp-rengine-admin .container2 {
+  background-color: #fff;
+  width: 80%;
+  margin:auto;
+}
 #wp-rengine-places-map {
 	width: 100%;
 	height: 500px;
 }
-.parking-group {
+.parking-group {§
 	margin-bottom: 10px;
 }
 .parking-row-add, .parking-row-del {
 	display: inline-block;
 }
+#wpRengineUser {
+  height: 55px;
+  font-size: 18px;
+  text-align: center;
+}
+.size12 {
+  font-size: 12px;
+}
 
+.size34px {
+  font-size: 34px;
+}
 #Layer_1 {
-	height: 30px;
-    display: inline-block;
+	height: 35px;
+    display: block;
     float: left;
-    margin-right: -256px;
-    top: 20px;
+    margin-right: 0px;
+    top: 22px;
+    width: 45px;
     position: relative;
+    margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 989px) {
+    #Layer_1 {
+    top:1px;
+  }
+}
+#adminmenu .wp-menu-image img {
+  padding:7px 0 0 !important;
 }
 
 #datetimepicker1, #datetimepicker2 {
 	z-index: 10000;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+.borderd {
+    border: 1px #eee solid;
+    padding: 15px;
+    margin-bottom:20px;
+    background:#efefef;
+}
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.wp-rengine-admin .gray-back {
+  /*background: -moz-linear-gradient(-45deg, #5152af 40%, #1ab7b8 100%, #7db9e8 100%);
+  background: -webkit-linear-gradient(-45deg, #5152af 40%,#1ab7b8 100%,#7db9e8 100%);
+  *background: linear-gradient(135deg, #5152af 40%,#1ab7b8 100%,#7db9e8 100%); */
+  background-color: white;
+  padding: 30px;
+  /*display: table-cell;*/
+  /*color: #000;*/
+  font-size: 18px;
+}
+
+.wp-rengine-admin .gray-back .help-block{
+  color:#ffffff5e;
+}
+
+.wp-rengine-admin .gray-back h2, .wp-rengine-admin .gray-back h3{
+  color:#42438b !important;
+}
+.wp-rengine-admin h2, h3 { 
+  color:#42438b !important; 
+  margin-top: 20px;
+  margin-bottom: 20px;
+   }
+
+.wp-rengine-admin .btn-success, .wp-rengine-admin .btn-light {
+
+  /* background-color: #670afe; */
+  padding: 15px 25px !important;
+  font-size: 16px !important; 
+  border-radius: 40px;
+  color:#fff;
+  background-color: #FF007F;
+
+}
+.wp-rengine-admin .btn-success {
+  background:#06c387;
+  box-shadow: 0 7px 14px 0 rgba(50,50,93,.1), 0 3px 6px 0 rgba(0,0,0,.07);
+  border-color: none;
+  border:0px;
+}
+
+.wp-rengine-admin .btn-success:hover {
+  background-color: #009968;
+}
+.wp-rengine-admin .big-logo {
+
+  /* background-color: #670afe; */
+  height: 60px;
+}
+.wp-rengine-admin .big-logo svg{ 
+  height: 120px;
+  position: relative;
+  top:0;
+  bottom:0;
+}
+.padd20t {
+  padding-top: 20px;
+}
+.padd30t {
+  padding-top: 30px;
+}
+
+.padd40t {
+  padding-top: 40px;
+}
+
+.paddr20 {
+  padding-right: 20px;
+}
+.paddl20 {
+  padding-left: 20px;
+}
+
+.padd20t {
+  padding-top: 20px !important;
+}
+
+.padd20b {
+  padding-bottom: 20px;
+}
+
+.padd10t {
+  padding-top: 10px;
+}
+
+.padd30t {
+  padding-top: 30px;
+}
+
+.shortcodes {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #efefef;
+}
+
+.green {
+  color:green;
+  font-size:14px;
 }

@@ -148,3 +148,7 @@ msgstr "HIBA"
 
 msgid "failure_message"
 msgstr "A foglalása sikertelen volt. Kérjük próbálja újra vagy lépjen velünk kapcsolatba."
+
+#: New entries --------------------------
+msgid "coupon_code"
+msgstr "Add your coupon code"

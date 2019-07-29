@@ -127,7 +127,7 @@ class HerbertServiceProvider extends ServiceProvider {
         global $wpdb;
 
         $capsule = new Capsule($this->app);
-
+        $collation = DB_CHARSET.'_unicode_ci';
         $capsule->addConnection([
             'driver' => 'mysql',
             'host' => DB_HOST,
@@ -135,7 +135,7 @@ class HerbertServiceProvider extends ServiceProvider {
             'username' => DB_USER,
             'password' => DB_PASSWORD,
             'charset' => DB_CHARSET,
-            'collation' => DB_COLLATE ?: 'utf8_general_ci',
+            'collation' => DB_COLLATE ?: $collation,
             'prefix' => $wpdb->prefix
         ]);
 

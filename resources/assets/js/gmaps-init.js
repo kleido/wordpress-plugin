@@ -1,5 +1,23 @@
+if (typeof google === 'object' && typeof google.maps === 'object') {
+    console.log('google places is loaded');
+} else {
+	console.log('google places is going to be loaded');
+	var appKey = jQuery('#googleKey').val();
+	if (appKey == '') {
+		appKey = 'AIzaSyCH2aMLtEaJUC81UK4M8H_Vb4ePt8iti9c';
+	} 
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.sync= true;
+    script.src = "https://maps.googleapis.com/maps/api/js?key="+appKey+"&v=3.exp&libraries=places&callback=mapsCallback";
+    document.head.appendChild(script);
+    console.log('google places loaded!');
+}
+
 var map;
 var place;
+
+
 
 function getLocation() {
     if (navigator.geolocation) {

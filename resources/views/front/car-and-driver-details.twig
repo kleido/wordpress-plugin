@@ -15,7 +15,7 @@
   </div>
 </div>
 <div class="row">
-	<div class="col-xs-12 text-center">
+	<div class="col-md-12 text-center">
 		{% if type == "activity" %}
 			<h3>{{tr_selected_services}} </h3>
 		{% else %}
@@ -24,15 +24,15 @@
 		{% if hideLocations == "true" or type == "activity" %}
 			<h4 class="hidden">{{tr_pickup}} : {{pickupParking}} ({{pickupTime}}) -> {{tr_return}}: {{returnParking}} ({{returnTime}})</h4>
 		{% else %}
-			<h4>{{tr_pickup}}: {{pickupParking}} ({{pickupTime}}) -> {{tr_return}}: {{returnParking}} ({{returnTime}})</h4>
+			<h4>{{tr_pickup}}: {{pickupParking}} {{pickupDateReadable}} {{pickupTime}} -> {{tr_return}}: {{returnParking}} {{returnDateReadable}} {{returnTime}}</h4>
 		{% endif %}
 	</div>
 </div>
 <div class="summary" >
 	<div class="row">
 		<div class="col-md-3">
-			{% if service.media[0]  %}
-				<img  style="max-width:170px;" src="{{service.media[0]}}" alt="{{service.title}}">
+			{% if (service.media|last)  %}
+				<img  style="max-width:170px;" src="{{service.media|last}}" alt="{{service.title}}">
 			{% endif %}
 		</div>
 		<div class="col-md-6">
@@ -41,9 +41,15 @@
 			<div class="service-attributes">
 				<ul class="list-inline">
 				{% for attribute in service.attributes %}
-					<li>
-						{{attribute.name}}: <strong>{{attribute.value}}</strong>,
-					</li>
+					{% if loop.last %}
+						<li>
+							{{attribute.value}} {{attribute.name}}
+						</li>
+					{% else %}
+						<li>
+							{{attribute.value}} {{attribute.name}} |
+						</li>
+					{% endif %}
 				{% endfor %}
 				</ul>
 			</div>
@@ -75,7 +81,7 @@
 		<div class="col-md-3">
 			<div class="pricing">{{tr_pricing}}</div>
 			<div class="row">
-				<div class="col-xs-12">
+				<div class="col-md-12">
 					<ul class = "price-analysis">
 						<li>{{tr_flat_cost}}: <span class="text-right">{{currency}}{{pricingData.flatCost}}</span> </li>
 						{% for offer in pricingData.offers %}
@@ -83,7 +89,7 @@
 						{% endfor %}
 					</ul>
 				</div>
-				<div class="col-xs-12">
+				<div class="col-md-12">
 					<span class="total-price"><span class="currency" data-currency="{{currency}}">{{currency}}</span><span class="clean-price">{{pricingData.totalCost}}</span>
 					{% if type == "activity" %}
 							<div class="service-cost-day"> 
@@ -101,6 +107,29 @@
 		</div>
 	</div>
 </div>
+{% if recapcha != '' %}
+	<script>
+	  function onSubmit(token) {
+	    alert('thanks ' + document.getElementById('email').value);
+	  }
+
+	  function validate(event) {
+	    event.preventDefault();
+	    if (!document.getElementById('email').value) {
+	      alert("You must add text to the required field");
+	    } else {
+	      grecaptcha.execute();
+	    }
+	  }
+
+	  function onload() {
+	    var element = document.getElementById('load');
+	    element.onclick = validate;
+	  }
+	</script>
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{%endif%}
+
 <form method="post" action="{{orderRevisionURL}}" class="confirm-order"  data-toggle="validator" role="form">
 {% if service.extras %}
 	<div class="extras">
@@ -108,12 +137,12 @@
 			<h2>{{tr_extras}}</h2>
 			{% for extra in service.extras %}
 				<div class="row">
-					<div class="col-xs-2">
+					<div class="col-xs-2 col-md-2">
 						{% if extra.media != '' %}
 							<img  src="{{extra.media}}" alt="{{extra.name}}">
 						{% endif %}
 					</div>
-				    <div class="col-xs-7">
+				    <div class="col-xs-7 col-md-7">
 						<div class="extra-title">
 							{{extra.name}} <span class="extra-cost">{{currency}}{% if extra.params.fixedPrice %}{{extra.params.fixedPrice}}{% set type='' %}{% else %}{{extra.params.price}} per day{% set type='per day' %} {% endif %}</span>
 						</div>
@@ -121,11 +150,18 @@
 							{{extra.description}}
 						</div>
 					</div>
-					<div class="col-xs-3">
+					<div class="col-xs-3 col-md-3">
 						<select class="extra-service form-control" name="extras[{{extra.id}}]" id="extras[{{extra.id}}]" data-type="{{type}}" data-id="{{extra.id}}" data-cost="{% if extra.params.fixedPrice %}{{extra.params.fixedPrice}}{% else %} {{extra.params.price}}{% endif %}" data-days="{{totalDays}}">
-							{% for i in 0..extra.params.rangeMax %}
-							    <option value="{{i}}">{{i}}</option>
-							{% endfor %}
+							{% if extra.params.rangeMax == 1 and extra.params.rangeMin == 0 %}
+								  <option value="0">{{tr_no}}</option>
+								  <option value="1">{{tr_yes}}</option>
+							{% elseif extra.params.rangeMax == 1 and extra.params.rangeMin == 1 %}
+								  <option value="1">{{tr_default}}</option>
+							{% else %}
+								{% for i in 0..extra.params.rangeMax %}
+								    <option value="{{i}}">{{i}}</option>
+								{% endfor %}
+							{% endif %}
 						</select>
 						<span class="extras-selected" id="ex-{{extra.id}}"></span>
 					</div>
@@ -136,7 +172,7 @@
 {% endif %}
 	<div class="driver">
 		<div class="row">
-			<div class="driver-wrapper">
+			<div class="driver-wrapper col-md-12">
 				<h2>{{tr_driver_details}}</h2>
 				{% if not isLoggedIn %}
 				<div class="col-xs-12 col-sm-6 hidden">
@@ -148,7 +184,7 @@
 							{{tr_login_label}}
 						</div>
 						<div class="row">
-							<div class="col-xs-12">
+							<div class="col-xs-12 col-md-12">
 								<a href="{{loginURL}}" class="caution-link">{{tr_login_button}}</a>
 								<a href="{{registrationURL}}" class="caution-link">{{tr_register_button}}</a>
 							</div>
@@ -156,28 +192,28 @@
 					</div>				
 				</div>
 				{% endif %}
-				<div class="col-xs-12 col-sm-12">
+				<div class="col-xs-12 col-md-12">
 					<div class="row form-group">
-						<div class="col-xs-4"><label for="fullname" class="control-label">{{tr_full_name}}</label></div>
-						<div class="col-xs-8 ">
+						<div class="col-xs-4 col-md-4"><label for="fullname" class="control-label">{{tr_full_name}}</label></div>
+						<div class="col-xs-8 col-md-8">
 							<input class="form-control" type="text" name="fullname" value="{{currentUser.user_firstname}} {{currentUser.user_lastname}}" required>
 						</div>
 					</div>
 					<div class="row form-group">
-						<div class="col-xs-4"><label for="email" class="control-label">Email</label></div>
-						<div class="col-xs-8 ">
-							<input class="form-control" type="email" name="email" value="{{currentUser.user_email}}" required  data-error="Invalid email address">
+						<div class="col-xs-4 col-md-4"><label for="email" class="control-label">Email</label></div>
+						<div class="col-xs-8 col-md-8">
+							<input class="form-control" type="email" name="email" id="email" value="{{currentUser.user_email}}" required  data-error="Invalid email address">
 						</div>
 					</div>
 					<div class="row form-group">
-						<div class="col-xs-4"><label for="tel" class="control-label">{{tr_phone}}</label></div>
-						<div class="col-xs-8 ">
+						<div class="col-xs-4 col-md-4"><label for="tel" class="control-label">{{tr_phone}}</label></div>
+						<div class="col-xs-8 col-md-8">
 							<input class="form-control" type="tel" name="tel" required >
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-xs-4">{{tr_flight_number}}</div>
-						<div class="col-xs-8 form-group">
+						<div class="col-xs-4 col-md-4">{{tr_flight_number}}</div>
+						<div class="col-xs-8 col-md-8 form-group">
 							<textarea class="form-control" name="flight-number" id="flight-number" rows="3" wrap="soft" placeholder = "{{tr_comment_placeholder}}"></textarea>
 						</div>
 					</div>
@@ -189,21 +225,49 @@
 	<div class="row">
 		
 		</br></br>
-		<div class="col-xs-12 text-center">
-			<div>{{tr_flat_cost}}: {{currency}}{{pricingData.flatCost}}</div>
-			<div>{{tr_extras}}: {{currency}}<span id="extra-cost">0<span></div> 
-			{{tr_total_cost}}: <span class="total-cost" data-flatcost="{{service.total_price}}"><span class = "currency">{{currency}}</span>{{service.total_price}}</span>
-			<div class="text-center"><button class="button" type="submit">{{tr_continue_button}}</button></div>
+		<div class="col-md-12 text-center">
+			<div class="costanalysis">{{tr_flat_cost}}: {{currency}}{{pricingData.flatCost}} <br>+ {{tr_extras}}: {{currency}}<span id="extra-cost">0<span></div>
+			<div class="payment-summary">
+			{{tr_total_cost}}: <span class="total-cost" data-flatcost="{{service.total_price}}"><span class = "currency">{{currency}}</span>{{service.total_price|number_format(2)}}</span>
+				{% if payment_gateway != 'false' %}
+					{% if paymenetPercent > 0 and paymenetPercent < 100 %}
+						<div class="text-center"><button class="btn btn-primary book-button button-gateway" type="submit" id="load" data-loading-text='{{tr_loading}} <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>'><img src="{{ card_icon }}"> {{tr_continue_button}} <br>{{tr_paynow}}: <span id="pay-now"><span class = "currency">{{currency}}</span>{{ (service.total_price * (paymenetPercent / 100))|number_format(2)}}</span></span><br><span class="laststep"> {{tr_laststep}}</span></button></div>
+						<div class="extra-cost text-center">{{tr_paynow}} <strong><span id="percentage">{{paymenetPercent}}</span>%</strong> {{tr_paynow_dscr}}</div> 
+					{% else %}
+							<div class="text-center"><button class="btn btn-primary book-button button-gateway" type="submit" id="load" data-loading-text='{{tr_loading}} <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>'><img src="{{ card_icon }}"> {{tr_continue_button}} </span></span><br><span class="laststep"> {{tr_laststep}}</span></button></div>
+					{%endif %}
+					{% if cash == "on" %}
+						<div class="text-center"> or </div>
+					{% endif %}
+				{% endif %}
+				{% if cash == "on" %}
+					<div class="text-center"><button class="btn btn-seconday book-button button-cash" type="submit" id="load" data-loading-text='{{tr_loading}} <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>'> <img src="{{ cash_icon }}">   {{tr_cash_button}}</button></div>
+					<input type="hidden" name="cashProcess" value="0">
+					<div class="costanalysis text-center">{{tr_cash_button_dscr}}</div> 
+				{% endif %}
+				<hr></hr>
+			</div>
 		</div>
-		<div class="col-xs-12  text-center">
+		<div class="col-md-12  text-center">
+		{% if termsPage %}
+			<input type="checkbox" name="tos-check" class="tos-check hidden" id="tos-check" checked> 
+			<label for="tos-check"><a href="{{termsPage}}" target="_blank" data-toggle="modal" data-target=".bs-example-modal-lg1">{{tr_terms_label}}</a></label>
+		{% else %}
 			<input type="checkbox" name="tos-check" class="tos-check hidden" id="tos-check" checked> 
 			<label for="tos-check"><a href="#" data-toggle="modal" data-target=".bs-example-modal-lg1">{{tr_terms_label}}</a></label>
+		{% endif %}
 		</div>
 	</div>
 	{% for key, input in inputs %}
 		<input type="hidden" name="{{key}}" value="{{input}}">
     {% endfor %}
     <input type="hidden" name="currency" value="{{currency}}">
-    
+    {% if recapcha != '' %}
+	    <div id='recaptcha' class="g-recaptcha"
+	          data-sitekey="{{ recapcha }}"
+	          data-callback="onSubmit"
+	          data-size="invisible">
+	    </div>
+	{%endif %}
 
 </form>

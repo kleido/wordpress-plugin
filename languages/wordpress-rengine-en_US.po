@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wordpress-rengine\n"
 "POT-Creation-Date: 2016-10-19 13:08+0300\n"
-"PO-Revision-Date: 2017-04-11 16:53+0300\n"
+"PO-Revision-Date: 2019-02-21 15:24+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,19 +15,19 @@ msgstr ""
 
 #: search form strings --------------------------
 msgid "pickup_parking_name"
-msgstr "pickup_parking_name"
+msgstr "Start Location "
 
 msgid "return_parking_name"
-msgstr "Return Parking"
+msgstr "End Location"
 
 msgid "same_parking"
-msgstr "Same return parking"
+msgstr "Same return location"
 
 msgid "pickup_date"
-msgstr "Pickup Date & Time"
+msgstr "Start Date"
 
 msgid "return_date"
-msgstr "Return Date & Time"
+msgstr "End Date"
 
 msgid "search_button"
 msgstr "Search"
@@ -67,16 +67,16 @@ msgid "attributes"
 msgstr "VEHICLE ATTRIBUTES"
 
 msgid "pickup"
-msgstr "PICKUP"
+msgstr "START"
 
 msgid "return"
-msgstr "RETURN"
+msgstr "END"
 
 msgid "no_results"
-msgstr "No results found!"
+msgstr "No results found. Please try different days!!"
 
 msgid "button"
-msgstr "SELECT"
+msgstr "Book Now"
 
 msgid "sold_out"
 msgstr "This vehicle is going to sell out soon!"
@@ -128,10 +128,10 @@ msgid "total_cost"
 msgstr "Total Cost"
 
 msgid "continue_button"
-msgstr "CONTINUE TO PAYMENT"
+msgstr "Continue To Payment"
 
 msgid "terms_label"
-msgstr "I agree to have read the Terms of Service"
+msgstr "By continue to payment means that you agree to the Terms and Condition. Click here to read them"
 
 msgid "flat_cost"
 msgstr "Flat rental cost"
@@ -176,3 +176,77 @@ msgstr "FAILURE"
 
 msgid "failure_message"
 msgstr "Your reservation was failed. Please try again or contact us."
+
+#: New entries --------------------------
+msgid "coupon_code"
+msgstr "Coupon code"
+
+msgid "group_mode"
+msgstr "Select group"
+
+msgid "loading"
+msgstr "Processing ..."
+
+msgid "cash_button"
+msgstr "Cash on delivery"
+
+msgid "cash_button_dscr"
+msgstr "You will receive a confimation email that validates your booking. You will also be asked for credit card upon delivery or earlier."
+
+msgid "cash_search_label"
+msgstr "or pay on delivery"
+
+msgid "No"
+msgstr "No thanks"
+
+msgid "Yes"
+msgstr "Yes please"
+
+msgid "last_step"
+msgstr "last step"
+
+msgid "default"
+msgstr "included"
+
+msgid "pay_now"
+msgstr "Pay now"
+
+msgid "pay_now_dscr"
+msgstr "of the total amount and the rest on the spot!"
+
+#: New entries version 2.0 --------------------------
+msgid "when"
+msgstr "When?"
+
+msgid "where"
+msgstr "Where?"
+
+msgid "where_end"
+msgstr "End Location"
+
+msgid "where_from"
+msgstr "Where from?"
+
+msgid "what"
+msgstr "What time?"
+
+msgid "what_end"
+msgstr "End time?"
+
+msgid "day"
+msgstr "day"
+
+msgid "days"
+msgstr "days"
+
+msgid "where_to"
+msgstr "Where to?"
+
+msgid "no_charge"
+msgstr "no charge now"
+
+msgid "distance"
+msgstr "Distance"
+
+msgid "duration"
+msgstr "Duration"

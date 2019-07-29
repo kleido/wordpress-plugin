@@ -1,3 +1,4 @@
+
 <form action="{{searchResultsURL}}" class='wprengine-form'>
 	{% if type == "activity" %}
 		<input  name="pickup_coordinates" class="hidden" value = "{{ parkings[0].parking_coordinates }}">
@@ -11,7 +12,7 @@
 					<div class="input-group date wppickupdate" id="datetimepicker1">
 						<input type="text" class="form-control" value="{{pickup_date_time}}" name="pickup_datetime">
 						<span class="input-group-addon">
-							<span class="glyphicon glyphicon-calendar"></span>
+							<i class="fa fa-calendar-check-o" aria-hidden="true"></i>
 						</span>
 					</div>
 				</div>
@@ -80,7 +81,7 @@
 							<input type="checkbox" name="same_return_parking" checked> {{tr_same_parking}}
 						</label>
 					</div>
-					<div class="form-group hidden return-group">
+					<div class="form-group return-group">
 						<input id="prediction-input-return" class="prediction-input form-control" type="text" placeholder="Change return place" >
 						<input  name="return_coordinates" class="hidden">
 					</div>
@@ -111,7 +112,7 @@
 						<input type="checkbox" name="same_return_parking" checked> {{tr_same_parking}}
 					</label>
 				</div>
-				<div class="form-group hidden return-group">
+				<div class="form-group return-group">
 					{% if current_mode == "true" %}
 						<div id="getReturnLocation" class="location-icon"> 
 							<a href="" alt="Get current location"> 
@@ -139,7 +140,7 @@
 					<div class="input-group date wppickupdate" id="datetimepicker1">
 						<input type="text" class="form-control" value="{{pickup_date_time}}" name="pickup_datetime">
 						<span class="input-group-addon">
-							<span class="glyphicon glyphicon-calendar"></span>
+							<i class="fa fa-calendar-check-o" aria-hidden="true"></i>
 						</span>
 					</div>
 				</div>
@@ -148,18 +149,27 @@
 					<div class="input-group date wpreturndate" id="datetimepicker2">
 						<input type="text" class="form-control" value="{{return_date_time}}" name="return_datetime">
 						<span class="input-group-addon">
-							<span class="glyphicon glyphicon-calendar"></span>
+							<i class="fa fa-calendar-check-o" aria-hidden="true"></i>
 						</span>
 					</div>
 				</div>
 			</div>
 		</div>
 	{% endif %}
-
-
-	<div class="form-group">
-		<button type="submit" class="btn btn-default">{{tr_search_button}}</button>
+	{% if coupon_mode == 'show' %}
+		<div class="row">
+			<div class="form-group tright">
+				<label for="coupon_code">{{tr_coupon_code}}</label>
+				<input type="text" class="form-control" name="coupon">
+			</div>
+		</div>
+	{% endif %}
+	<div class="row">
+		<div class="form-group col-md-12 ">
+			<button type="submit" id="load" data-loading-text='{{tr_loading}} <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>' class="btn btn-default btn-secondary paddr20 paddl20 tright search-button">{{tr_search_button}}</button>
+		</div>
 	</div>
+
 	
 	<input type="hidden" id="calendar_mode" value="{{calendar_mode}}" name="calendar_mode">
 	<input type="hidden" id="calendar_view" value="{{calendar_view}}" name="calendar_view">

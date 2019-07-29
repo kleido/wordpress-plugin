@@ -1,27 +1,192 @@
-
-<div class="row">
-	<div class="col-xs-12 text-center">
-		<h3>You are redirect to payment gateway. Please wait...</h3>
-		<i class="fa-li fa fa-spinner fa-spin fa-3x"></i>
-	</div>
-</div>
-<div class="row">
-	<div class="col-xs-12 text-center">
-		<div class="action-container">
-			<div class="action-symbol">
-				<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-			</div>
-			<div class="action-desc">
-				<p>{{tr_paypal_message}}</br>{{paymentData.paymentID}}</p>
-				<p>{{exchangeMessage}}</p>
-		
+{% if gateway == "stripe" %}
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<div class="action-container">
+				<div class="action-symbol">
+					<h3>{{tr_action_required}}</h3>
+					<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+				</div>
+				<div class="action-desc">
+					<p>Please click "Pay with Card" to complete your booking.</p>
+					<p>{{exchangeMessage}}</p>
+					<form action="{{returnUrl}}&gateway=stripe" method="POST">
+					  <script
+					    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+					    data-key="{{stripe_key}}"
+					    data-amount="{{stripeCost}}"
+					    data-name="{{company[0].name}}"
+					    data-description="Booking #{{order.reference}}"
+					    data-image="{{company[0].logo}}"
+				     	data-zip-code="true"
+					    data-locale="auto"
+					    data-email="{{email}}"
+					    data-currency="{{currencyISO }}">
+					  </script>
+					  <input type="hidden" name="gateway" value="stripe"/>
+					  <input type="hidden" name="currency" value="{{currencyISO }}"/>
+					</form>
+					<img src={{ stripe }} height="81px;" > 
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+
+{% elseif gateway == "payzen" %}
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<div class="action-container">
+				<div class="action-symbol">
+					<h3>{{tr_action_required}}</h3>
+					<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+				</div>
+				<div class="action-desc">
+					<p>Please click "Pay with Card" to complete your booking.</p>
+					<p>{{exchangeMessage}}</p>
+					<!-- payment button HTML code -->
+					<div class="kr-checkout "></div>
+					<script src={{payzen_url}}
+					    kr-public-key="{{payzen_key}}"
+					    kr-post-url="{{returnUrl}}&gateway=payzen"
+					    kr-shop-name="{{company[0].name}}"
+					    kr-button-label="Pay with Card!"
+					    kr-button-class="btn btn-primary"
+					    kr-order-summary="Booking #{{order.reference}}" >
+					</script>
+					<img src={{ payzen }} height="81px; " > 
+				</div>
+			</div>
+		</div>
+	</div>
+	
+{% elseif gateway == "paypal" %}
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h3>You are redirect to payment gateway. Please wait...</h3>
+			
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<div class="action-container">
+
+				<div class="action-symbol">
+
+					<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+				</div>
+				<div class="action-desc">
+					<p>{{tr_paypal_message}}</br>{{paymentData.paymentID}}</p>
+					<p>{{exchangeMessage}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		window.location.replace("{{paymentData.approvalUrl}}");
+	</script>
+
+{% elseif gateway == "viva" %}
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h3>You are redirect to payment gateway. Please wait...</h3>
+			
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<div class="action-container">
+
+				<div class="action-symbol">
+
+					<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+				</div>
+				<div class="action-desc">
+					<p>Your Payment transcation id: {{paymentData.id}}</p>
+					<p>{{exchangeMessage}}</p>
+					<form action="{{paymentData.approvalUrl}}&gateway=viva" method="POST">
+					 <button type="submit" class="btn btn-primary" name="Pay with Card">Pay with Card</button>
+					  <input type="hidden" name="gateway" value="viva"/>
+					  <input type="hidden" name="currency" value="{{currencyISO }}"/>
+					</form>
+					<img src={{ viva }} height="81px;" > 
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% elseif gateway == "alpha" %}
+	<div class="row">
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<div class="action-container">
+
+				<div class="action-symbol">
+
+					<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+				</div>
+				<div class="action-desc">
+					<p>Your will be redirected to Alphabank Payment Gateyway.<br> Press "Pay with Card" to continue to payment!</p>
+					<p>{{exchangeMessage}}</p>
+					{% if mode == 'live' %}
+						<form id="shopform1" name="demo" method="POST" action="https://www.alphaecommerce.gr/vpos/shophandlermpi" accept-charset="UTF-8" >
+					{% else %}
+						<form id="shopform1" name="demo" method="POST" action="https://alpha.test.modirum.com/vpos/shophandlermpi" accept-charset="UTF-8" >
+					{% endif %}
+						<input type="hidden" name="mid" value="{{paymentData.data[1]}}"/>
+						<input type="hidden" name="orderid" value="{{paymentData.data[4]}}"/>
+						<input type="hidden" name="orderAmount" value="{{paymentData.data[6]}}"/>
+						<input type="hidden" name="currency" value="{{paymentData.data[7]}}"/>
+						<input type="hidden" name="payerEmail" value="{{paymentData.data[8]}}"/>
+						<input type="hidden" name="confirmUrl" value="{{paymentData.data[33]}}"/>
+						<input type="hidden" name="cancelUrl" value="{{paymentData.data[34]}}"/>
+						<div class="col-md-6 col-md-offset-3 col-xs-12 payMethod radio">
+							<label><input type="radio" name="payMethod" value="" checked="checked"  id="creditCard"> Pay by Credit Card <span><img  height="50px" src="{{networks}}"></span></label>
+						</div>
+						<div class="col-md-6 col-md-offset-3 col-xs-12 payMethod radio">
+							<label><input type="radio" name="payMethod" value="auto:MasterPass" id="masterPass"> Pay with MasterPass <span><img  height="50px"  src="{{masterpass}}"></span></label>
+						</div>
+						<input type="hidden" name="digest" value="{{paymentData.digest}}" id="digest"/>
+						<div class="padd20t"><button type="submit" class="btn btn-primary" name="Pay with Card">Proceed to Payment</button></div>
+					</form>	
+					<div class="padd20t"><img src={{ alpha }} height="81px;" > </div>
+					<input type="hidden" value="{{paymentData.digest}}" name="digest2" id="digest1"/>
+					<input type="hidden" value="{{paymentData.digest2}}" name="digest2" id="digest2"/>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% elseif gateway == "cash" %}
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h3>We are preparing your booking. Please wait...</h3>
+			<i class="fa-li fa fa-spinner fa-spin fa-3x"></i>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<div class="action-container">
+				<div class="action-symbol">
+					<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+				</div>
+				<div class="action-desc">
+					<p>{{exchangeMessage}}</p>
+					<form action="{{ returnUrl }}"  id="cashForm"> 
+						  <input type="hidden" name="gateway" value="cash"/>
+						   <input type="hidden" name="order_id" value="{{order.id}}"/>
+					</form>
+				</div>
+				<img src={{ cash }} height="81px; " > 
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		document.getElementById("cashForm").submit();
+	</script>
+{% endif %}
 
 
-<script type="text/javascript">
-	window.location.replace("{{paymentData.approvalUrl}}");
-</script>
+
+
+
 

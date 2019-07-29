@@ -149,3 +149,9 @@ msgstr "FAILURE"
 
 msgid "failure_message"
 msgstr "Your reservation was failed. Please try again or contact us."
+
+#: New entries --------------------------
+msgid "coupon_code"
+msgstr "Add your coupon code"
+
+

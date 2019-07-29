@@ -150,3 +150,7 @@ msgstr "ECHEC"
 
 msgid "failure_message"
 msgstr "Votre réservation à échouée. Veuillez réessayer ou nous contacter."
+
+#: New entries --------------------------
+msgid "coupon_code"
+msgstr "Add your coupon code"
