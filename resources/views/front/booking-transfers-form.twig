@@ -1,0 +1,175 @@
+<form action="{{searchResultsURL}}" class='wprengine-form'>
+	<div class="row">
+		{% if hideLocations == "true" %}
+			<input  name="pickup_coordinates" class="hidden" value = "{{ parkings[0].parking_coordinates }}">
+			<input  name="return_coordinates" class="hidden" value = "{{ parkings[0].parking_coordinates }}">
+			<input type="hidden" name="pickup_parking_name"  value = "{{ parkings[0].parking_name }}" >
+			<input type="hidden" name="return_parking_name" id="return_parking_name" value = "{{ parkings[0].parking_name }}" >
+		{% else %}
+			{% if location_mode == "auto" %}
+				<div class="col-md-6 layer visible " id="affiliate_select">
+					<div class="form-group">
+						<h4 class="control-label"><i class="fa fa-flag-o" aria-hidden="true"></i> {{tr_where_from}}</h4>
+						<input id="prediction-input" class="prediction-input form-control" type="text" placeholder="{{tr_pickup_parking_name}}" autocomplete="off" required>
+						<input  name="pickup_coordinates" value="{{pickupCoordinates}}" class="hidden">
+					</div>
+					<ul id="prediction_results"></ul>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group return-group" data-type="transfers">
+						<h4 class="control-label"><i class="fa fa-flag-checkered" aria-hidden="true"></i> {{tr_where_to}}</h4>
+						<input id="prediction-input-return" class="prediction-input form-control" type="text" placeholder="{{tr_return_parking_name}}" autocomplete="off" required>
+						<input  name="return_coordinates" value="{{returnCoordinates}}" class="hidden">
+					</div>
+						
+				</div>
+				<div class="clearfix"></div>
+			{% else %}
+				<div class="col-md-6">
+					<h4 class="control-label"><i class="fa fa-flag-o" aria-hidden="true"></i> {{tr_where_from}}</h4>
+					<div class="form-group">
+						{% if current_mode == "true" %}
+							<div id="getPickupLocation" class="location-icon"> 
+								<a href="" alt="Get current location"> 
+									<i class="fa fa-location-arrow" aria-hidden="true"></i>
+								</a>
+							</div>
+						{% endif %}
+						
+						<select class="form-control" name="pickup_coordinates" id="pickup_coordinates">
+							{% for parking in parkings %}
+							<option value="{{parking.parking_coordinates}}">{{parking.parking_name}}</option>
+							{% else %}
+							<option value="" readonly>No Preset Parkings available</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group return-group" data-type="transfers">
+						<h4 class="control-label"><i class="fa fa-flag-checkered" aria-hidden="true"></i> {{tr_where_to}}</h4>
+						{% if current_mode == "true" %}
+							<div id="getReturnLocation" class="location-icon"> 
+								<a href="" alt="Get current location"> 
+									<i class="fa fa-location-arrow" aria-hidden="true"></i>
+								</a>
+							</div>
+						{% endif %}
+						<select class="form-control" name="return_coordinates" id="return_coordinates">
+							{% for parking in parkings %}
+							<option value="{{parking.parking_coordinates}}">{{parking.parking_name}}</option>
+							{% else %}
+							<option value="" readonly>No Preset Parkings available</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+			{% endif %}
+			<input type="hidden" name="pickup_parking_name" required>
+			<input type="hidden" name="return_parking_name" required>
+		{% endif %}
+	</div>
+
+	<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<h4 class="control-label"><i class="fa fa-calendar" aria-hidden="true"></i> {{tr_when}} </h4>
+					<div class="input-group date " id="">
+						<input type="text" class="form-control pickup_date" value="{{pickup_date_time}}" name="pickup_date" id="pickup_date" autocomplete="off" >
+						<span class="input-group-append">
+							<i class="fa fa-calendar-check-o input-group-text" aria-hidden="true"></i>
+						</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="form-group">
+					<h4 class="control-label"><i class="fa fa-clock-o" aria-hidden="true"></i> {{tr_what}}</h4>
+					<div class="input-group date " id="">
+						<input type="text" class="form-control pickup_time" value="{{pickup_date_time|date('H:i')}}" name="pickup_time" id="pickup_time" autocomplete="off" >
+						<span class="input-group-append">
+							<i class="fa fa-clock-o input-group-text" aria-hidden="true"></i>
+						</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-4 no-wrap">
+						<label class="more-filters-label"> 
+							<i class="fa fa-user" aria-hidden="true"></i> {{tr_adults}} <br>
+						</label>
+						<a href="#" class="minus-control control">-</a>
+							<input name="adults" class="extra amount-control" type="text" placeholder="Adults" data-default value="1">
+						<a href="#" class="plus-control control">+</a>
+					</div>
+					<div class="col-md-4 no-wrap">
+						<label class="more-filters-label"> 
+							<i class="fa fa-child" aria-hidden="true"></i> {{tr_children}} <br>
+						</label>
+						<a href="#" class="minus-control control">-</a>
+							<input name="children" class="extra amount-control input-reflect" type="text" placeholder="Child" data-default value="0">
+						<a href="#" class="plus-control control">+</a>
+					</div>
+					<div class="col-md-4 no-wrap">
+						<label class="more-filters-label"> 
+							<i class="fa fa-child" aria-hidden="true"></i> {{tr_infants}} <br>
+						</label>
+						<a href="#" class="minus-control control">-</a>
+							<input name="infants" class="extra amount-control input-reflect" type="text" placeholder="infants" data-default value="0">
+						<a href="#" class="plus-control control">+</a>
+					</div>
+				</div>
+			</div>
+			{% if group_mode == 'show' %}
+				<div class=" col-md-3 form-group tright">
+					<label for="group_mode">{{tr_group_mode}}</label>
+					<select class="form-control" name="group">
+						<option value=""></option> 
+						{% for group in groups %}
+							{% if group.id == group_id %}
+								<option value="{{group.id}}" selected>{{group.name}}</option>
+							{% else %}
+								<option value="{{group.id}}">{{group.name}}</option>
+							{% endif %}
+						{% endfor %}
+					</select>
+				</div>
+			{% else %}
+				<input type="hidden" id="group" value="{{group_id}}" name="group">
+			{% endif %}
+			{% if coupon_mode == 'show' %}
+				<div class=" col-md-3 form-group tright">
+					<label for="coupon_code">{{tr_coupon_code}}</label>
+					<input type="text" class="form-control" name="coupon">
+				</div>
+			{% endif %}
+			<div class="col-md-3">
+				<div class="form-group">
+					<h4 class="control-label">&nbsp;</h4>
+					<button class="btn  btn-primary" type="submit" data-loading-text="{{'loading'}} <i class='fa fa-circle-o-notch fa-spin'></i>"> {{tr_search_button}} <i class="fa fa-arrow-circle-right"></i></button>
+				</div>
+			</div>
+	</div>
+	
+	
+	<input type="hidden" id="calendar_mode" value="{{calendar_mode}}" name="calendar_mode">
+	<input type="hidden" id="calendar_view" value="{{calendar_view}}" name="calendar_view">
+	<input type="hidden" id="calendar_step" value="{{calendar_step}}" name="calendar_step">
+	<input type="hidden" id="calendar_hours" value="{{calendar_hours}}" name="calendar_hours">
+	<input type="hidden" id="placement" value="{{placement}}" name="placement">
+	<input type="hidden" id="slideMode" value="{{slideMode}}" name="slideMode">
+	<input type="hidden" id="type" value="{{type}}" name="type">
+	<input type="hidden" id="services_ids" value="{{services_ids}}" name="services_ids">
+	<input type="hidden" id="base_coordinates" value="{{base_coordinates}}" name="base_coordinates">
+	<input type="hidden" id="base_radius" value="{{base_radius}}" name="base_radius">
+	<input type="hidden" id="hideLocations" value="{{hideLocations}}" name="hideLocations">
+
+</form>
+
+
+
+
+

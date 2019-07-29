@@ -1,0 +1,99 @@
+
+<form action="{{searchResultsURL}}" class='wprengine-form'>
+	<div class="row">
+		
+			<input  name="pickup_coordinates" class="hidden" value = "{{ parkings[0].parking_coordinates }}">
+			<input  name="return_coordinates" class="hidden" value = "{{ parkings[0].parking_coordinates }}">
+			<input type="hidden" name="pickup_parking_name"  value = "{{ parkings[0].parking_name }}" >
+			<input type="hidden" name="return_parking_name" id="return_parking_name" value = "{{ parkings[0].parking_name }}" >
+			<input  name="radius" type="hidden" value="zones">
+			
+			<div class="col-md-3">
+				<div class="form-group">
+					<h4 class="control-label"><i class="fa fa-calendar" aria-hidden="true"></i> {{tr_when}}</h4>
+					<div class="input-group date " id="">
+						<input type="text" class="form-control pickup_date_range" value="{{pickup_date_time}}" name="pickup_range" id="pickup_date_time">
+						<span class="input-group-addon input-group-append">
+							<i class="fa fa-calendar-check-o input-group-text" aria-hidden="true"></i>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="row">
+					<div class="col-md-4 no-wrap">
+						<label class="more-filters-label"> 
+							<i class="fa fa-user" aria-hidden="true"></i> {{tr_adults}}  <br>
+						</label>
+						<a href="#" class="minus-control control">-</a>
+							<input name="adults" class="extra amount-control" type="text" placeholder="Adults" data-default value="1">
+						<a href="#" class="plus-control control">+</a>
+					</div>
+					<div class="col-md-4 no-wrap">
+						<label class="more-filters-label"> 
+							<i class="fa fa-child" aria-hidden="true"></i> {{tr_children}} <br>
+						</label>
+						<a href="#" class="minus-control control">-</a>
+							<input name="children" class="extra amount-control input-reflect" type="text" placeholder="Child" data-default value="0">
+						<a href="#" class="plus-control control">+</a>
+					</div>
+					<div class="col-md-4 no-wrap">
+						<label class="more-filters-label"> 
+							<i class="fa fa-child" aria-hidden="true"></i> {{tr_infants}} <br>
+						</label>
+						<a href="#" class="minus-control control">-</a>
+							<input name="infants" class="extra amount-control input-reflect" type="text" placeholder="infants" data-default value="0">
+						<a href="#" class="plus-control control">+</a>
+					</div>
+				</div>
+			</div>
+			{% if group_mode == 'show' %}
+				<div class=" col-md-3 form-group tright">
+					<h4  class="control-label">{{tr_group_mode}}</h4>
+					<select class="form-control" name="group">
+						<option value=""></option> 
+						{% for group in groups %}
+							{% if group.id == group_id %}
+								<option value="{{group.id}}" selected>{{group.name}}</option>
+							{% else %}
+								<option value="{{group.id}}">{{group.name}}</option>
+							{% endif %}
+						{% endfor %}
+					</select>
+				</div>
+			{% else %}
+				<input type="hidden" id="group" value="{{group_id}}" name="group">
+			{% endif %}
+			{% if coupon_mode == 'show' %}
+				<div class=" col-md-3 form-group tright">
+					<label for="coupon_code">{{tr_coupon_code}}</label>
+					<input type="text" class="form-control" name="coupon">
+				</div>
+			{% endif %}
+			<div class="col-md-3">
+				<div class="form-group">
+					<h4 class="control-label">&nbsp;</h4>
+					<button class="btn  btn-primary" type="submit" data-loading-text="{{'loading'}} <i class='fa fa-circle-o-notch fa-spin'></i>"> {{tr_search_button}} <i class="fa fa-arrow-circle-right"></i></button>
+				</div>
+			</div>
+	</div>
+
+	
+	<input type="hidden" id="calendar_mode" value="{{calendar_mode}}" name="calendar_mode">
+	<input type="hidden" id="calendar_view" value="{{calendar_view}}" name="calendar_view">
+	<input type="hidden" id="calendar_step" value="{{calendar_step}}" name="calendar_step">
+	<input type="hidden" id="calendar_hours" value="{{calendar_hours}}" name="calendar_hours">
+	<input type="hidden" id="placement" value="{{placement}}" name="placement">
+	<input type="hidden" id="slideMode" value="{{slideMode}}" name="slideMode">
+	<input type="hidden" id="type" value="{{type}}" name="type">
+	<input type="hidden" id="services_ids" value="{{services_ids}}" name="services_ids">
+	<input type="hidden" id="base_coordinates" value="{{base_coordinates}}" name="base_coordinates">
+	<input type="hidden" id="base_radius" value="{{base_radius}}" name="base_radius">
+	<input type="hidden" id="hideLocations" value="{{hideLocations}}" name="hideLocations">
+
+</form>
+
+
+
+
+

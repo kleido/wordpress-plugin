@@ -1,0 +1,477 @@
+<div id="wp-rengine-loader" class="">
+	<i class="fa fa-circle-o-notch fa-spin-fast fa-3x fa-fw"> </i><span class="sr-only">loading...</span>        
+</div>
+<div class="row">
+	<div class = "change_dates col-md-12 text-center">
+		<a href="#" id="change_dates"> {{tr_change_dates}} </a>
+			<div class="col-sm-12 text-left wprengine-results-form">
+				{% if type == "rentals" %}
+					{% include '@WPRengine/front/booking-rentals-old-form.twig' %}
+				{% elseif type == "hotels" %}
+					{% include '@WPRengine/front/booking-hotels-form.twig' %}
+				{% elseif type == "transfers" %}
+					{% include '@WPRengine/front/booking-transfers-form.twig' %}
+				{% elseif type == "rentals-modern" %}
+					{% include '@WPRengine/front/booking-rentals-form.twig' %}
+				{% else %}
+					{% include '@WPRengine/front/booking-appointment-form.twig' %}
+				{% endif %}
+			</div>
+		</a>
+		<input type="hidden" value="{{googleKey}}" id="googleKey"/>
+	</div>
+	<div class="col-md-12 text-center padd20b">
+		{% if type == "activity" %}
+			<h4>{{tr_available_activities}} {{tr_for}} {{pickupDateReadable}}</h4>
+		{% else %}
+			<h4>{{tr_available_activities}} {{tr_from}} {{pickupDateReadable}} {{tr_to}} {{returnDateReadable}}</h4>
+		{% endif %}
+	</div>
+	<div class="col-md-6 text-right hidden">
+		{% if hideLocations == "true" or type == "activity" %}
+			<h4 class="hidden">{{tr_pickup}} : {{pickupParking}} ({{pickupTime}}) -> {{tr_return}}: {{returnParking}} ({{returnTime}})</h4>
+		{% else %}
+			<h4>{{tr_pickup}} : {{pickupParking}} ({{pickupTime}}) -> {{tr_return}}: {{returnParking}} ({{returnTime}})</h4>
+		{% endif %}
+	</div>
+</div>
+
+{% set emptyRates = 'true' %}
+{% for service in services.data %}
+	{% if results_available_mode == 'true' or service.total_availability %}
+		{% set emptyRates = 'false' %}
+		<div class="result-item service-{{service.id}}" >
+			<div class="row item-block ">
+				<div class="col-xs-12 col-md-3 text-center image-block">
+				{% if (service.media|last)  %}
+					{# <div style="background-image: url({{service.media|last}})"> </div> #}
+					<div class="image-area">
+					<img style="max-width:170px;" src="{{service.media|last}}" alt="{{service.title}}"> 
+					</div>
+				{% endif %}
+				</div>
+				{% if  ((service.type == "interval"))  %}
+					<div class="col-xs-12 col-md-6 main-block">
+				{% else %}
+					<div class="col-xs-12 col-md-6 main-block">
+				{% endif %}
+				
+					<h2 class="padd10t">{{service.title}}</h2>
+					<div class="slide-flag text-uppercase"><strong>{{service.text_flag}} </strong></div>
+					<div class="service-group">{{service.group.name}}</div>
+					<div class="service-attributes">
+						<ul class="list-inline">
+						{% for attribute in service.attributes %}
+							{% if loop.last %}
+								<li>
+									{% if attribute.media_type == 'image' %}
+										<img style="max-width:25px;" src="{{attribute.media}}" alt="{{attribute.media}}"> {{attribute.value}} {{attribute.name}}
+									{% elseif attribute.media_type == 'icon' %}
+										{{attribute.media | raw }} {{attribute.value}} {{attribute.name}}
+									{% else %}
+										{{attribute.value}} {{attribute.name}}
+									{% endif %}
+								</li>
+							{% else %}
+								<li>
+									{% if attribute.media_type == 'image' %}
+										<img style="max-width:25px;" src="{{attribute.media}}" alt="{{attribute.media}}"> {{attribute.value}} {{attribute.name}}
+									{% elseif attribute.media_type == 'icon' %}
+										{{attribute.media | raw }} {{attribute.value}} {{attribute.name}}
+									{% else %}
+										{{attribute.value}} {{attribute.name}}
+									{% endif %}
+									
+								</li>
+							{% endif %}
+						{% endfor %}
+						</ul>
+					</div>
+					
+					{% if service.description %}
+						<div class="row">
+							<div class="service-attributes">
+							<div class="col-xs-12">{{service.description}}</div>
+							</div>
+						</div>
+					{% endif %}
+					{% if service.includes  %}
+						<div class="row">
+							<div class="service-attributes">
+								<div class="col-xs-12 black"><strong>{{tr_includes}}:</strong> </div>
+								<div class="col-xs-12">{{service.includes}}</div>
+							</div>
+						</div>	
+					{% endif %}
+					{% if service.excludes  %}
+						<div class="row">
+							<div class="service-attributes">
+								<div class="col-xs-12 black"><strong>{{tr_excludes}}:</strong></div>
+								<div class="col-xs-12">{{service.excludes}}</div>
+							</div>
+						</div>		
+					{% endif %}
+
+					{# {% if service.availabilities_and_rates[0].availability <= 3 %}
+						<div class="service-low">{{tr_sold_out}}</div>
+					{% elseif service.availabilities_and_rates[0].availability <= 1 %} 
+						<div class="service-last">{{tr_last_booking}}}</div>
+					{% endif %} #}
+
+				</div>
+				{% if  ((service.type == "interval"))  %}
+					<div class="col-xs-12 col-md-3 text-center price-interval-block hidden">
+						<div class="service-prices">
+							<span class = "currency">{{currency}}</span><span class="service-total">1222</span> <span class="service-unit"></span>
+							
+						</div>
+						
+						<div class="service-book">
+							<a href="{{detailsURL}}?{{queryString}}&amp;service_id={{service.id}}&amp;totalDays={{totalDays}}" data-selectedrategroup="" data-start="" data-end="" data-total="" data-date="" data-selected-slots="" data-service-id="{{service.id}}" data-spots="{{service.availabilities_and_rates|json_encode()}}" data-filters="{{filters|json_encode()}}" class="btn btn-primary book-button text-center" id="load" data-loading-text='{{tr_loading}} <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>'> <i class="fa fa-calendar"></i> {{tr_button}} </a> 
+						</div>
+					</div>
+					<div class="col-xs-12 col-md-12 text-center price-block">
+				{% else %}
+					<div class="col-xs-12 col-md-3 text-center price-block">
+				{% endif %}
+
+				{# --------------------- OFFERS -----------------------------------#}
+					{% if service.offers_applied %}
+						{% for offer in service.offers_applied %}
+							{% if offer.offer_hide == 0 %}
+								{% if offer.offer_type == "discount" %}
+									<div class="service-offer">
+										{{offer.title}} <i class="fa fa-tag" aria-hidden="true"></i> 
+									</div>
+								{% else %}
+									<div class="service-offer-extra">
+										{{offer.title}} <i class="fa fa-tag" aria-hidden="true"></i> 
+									</div>
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+					{% endif %}
+
+
+				{# --------------------- PRICING -----------------------------------#}
+
+					{% if  service.type == "request" %}
+					  	<div class="service-book padd30t">
+		                    <a href="#" class="btn btn-primary  book-button" data-toggle="modal" data-id="{{service.id}}" data-target="#contactUsModal"  data-start="" data-end="" data-filters = > <i class="fa fa-paper-plane-o"></i>  on Request</a>
+		                </div>
+					{#-- Applies on appointment services with interval  --#}
+
+					{% elseif  ((service.type == "interval"))  %}
+						{% if (service.available_spots) %}
+							{% if  ((service.maxmin != null)) %}
+								
+							{% endif %}
+							<div class="service-book">
+								{# -------------------------    Date intervals -------------------#}
+								{% for date in daterange  %}
+								  	{% set datekey = date | date('Y-m-d') %}
+								    {% if service.availabilities_and_rates[datekey].day_available_spots > 0 %}
+								         <div class="row">
+								            <div class="col-md-12 date-row">
+								            
+								                {% for  key, rategroup in service.availabilities_and_rates[datekey]['rates']  %}
+								                    {%if ((rategroup.spots.slots) and (rategroup.spots.slots != "false") and (rategroup.availability > 0 )) %}
+								                        <div class="row padd10t">
+							                                <div class="col-md-3 padd10t"> <h4><i class="fa fa-calendar-o" aria-hidden="true"></i> {{datekey|date('D d M')}}</h4>
+							                                 <span class="price"><strong>{{currency}}{{ rategroup.spots.value}} </strong>{{service.units[key]}}</span></div>
+								                            <div class="col-md-9 col-xs-offset-2 col-md-offset-0 padd20t">
+								                            	<div class="row">
+									                                {% for time, value in rategroup.spots.slots[:5] %}
+									                               
+									                                    {% if value > 0 %} 
+									                                        {% if  datekey == now|date('Y-m-d') and (time < now|date('H:i',timezone)) %}
+									                                           <div class="col-md-2 col-xs-3 timeCell-disabled text-center " >{{time}}</div>
+									                                        {% else %}
+									                                       		 <a href="#" data-service-id="{{service.id}}" data-totalDays="{{totalDays}}"   data-selectedTime="{{time}}" data-selectedDate="{{datekey}}" data-selectedRategroup="{{key}}" data-selectedEndTime={{time|date_modify('+' ~ service.interval_min ~' minutes')|date('H:i')}} data-value="{{rategroup.spots.value}}" data-unit="{{service.units[key]}}" class="col-md-2 col-xs-3 button-primary timeCell text-center" id="load" data-loading-text='{{tr_loading}} <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>'>{{time}}</a> 
+
+									                                       		
+									                                            {#<div class="col-md-2 col-xs-3 button-primary timeCell text-center" data-date="{{datekey}}" data-time="{{time}}" data-rate="{{key}}" data-value={{rategroup.spots.value}} data-multiple-value="" data-service="{{service.id}}" data-encrypt-value=""  >{{time}}</div>#}
+									                                         {% endif %} 
+									                                     {% else %} 
+									                                         <div class="col-md-2 col-xs-3 timeCell-disabled text-center " >{{time}}</div>
+									                                    {% endif %}
+									                               {% endfor %}
+								                          	 	</div>
+								                               {% if rategroup.spots.slots|length > 5  %}
+									                              
+						                                			<div class="col-xs-12 text-left padd10t"><a  class="more-hours reset-this" data-toggle="collapse" data-target="#collapsehrs-{{key}}-{{datekey}}" id="{{key}}-{{datekey}}">Δείτε περισσότερες διαθέσιμες ώρες <i class="fa fa-angle-down"></i> </a></div>
+							                                		<div class="collapse " id="collapsehrs-{{key}}-{{datekey}}">
+							                                			<div class="row padd10t">
+						                                		       		{% for time, value in rategroup.spots.slots[5:] %}
+											                                    {% if value > 0 %} 
+											                                        {% if  datekey == now|date('Y-m-d') and ((time)< now|date('H:i',timezone)) %}
+											                                           <div class="col-md-2 col-xs-3 timeCell-disabled text-center " >{{time}}</div>
+											                                        {% else %} 
+											                                              <a href="#" data-service-id="{{service.id}}" data-totalDays="{{totalDays}}"   data-selectedTime="{{time}}" data-selectedDate="{{datekey}}" data-selectedRategroup="{{key}}" data-selectedEndTime={{time|date_modify('+' ~ service.interval_min ~' minutes')|date('H:i')}} data-value="{{rategroup.spots.value}}" data-unit="{{service.units[key]}}" class="col-md-2 col-xs-3 button-primary timeCell text-center" id="load" data-loading-text='{{tr_loading}} <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>'>{{time}}</a> 
+											                                         {% endif %} 
+											                                     {% else %} 
+											                                         <div class="col-md-2 col-xs-3 timeCell-disabled text-center " >{{time}}</div>
+											                                    {% endif %}
+										                               		{% endfor %}
+										                               	</div>
+									                               	  </div>
+									                            {% endif %}
+								                            </div>
+								                        </div>
+						                      	  	{% endif %} 
+							                   	{% endfor %}
+											</div>
+										</div>
+
+						                        {# --
+								                    @elseif (($rategroupObj->find($key) && $rategroupObj->find($key)->rate_type == "quantitative") && ($rategroup->availability > 0 ))
+								                            sdfsdfsdf
+								                    @endif 
+
+								                @endforeach
+								            </div>
+								             <div class="col-md-2">
+								                @if ($route == 'external')
+								                   <form action="{{ route('webapp.book-step1') }}" method="POST"  >
+								                        {!! csrf_field() !!}
+
+								                        <input type="hidden" name="rategroupId" id="rategroup-id-{{$date->format('Y-m-d')}}" value=""> 
+								                        <input type="hidden" name="start" value="{{ encrypt($date->format('Y-m-d'))}}">
+								                        <input type="hidden" name="end" value="{{ encrypt($date->format('Y-m-d'))}}">
+								                        <input type="hidden" name="slots" id="slots-{{$date->format('Y-m-d')}}" value="">
+								                        <input type="hidden" name="language" value="{{encrypt(session('language'))}}">
+								                        <input type="hidden" name="total-price" id="total-{{$date->format('Y-m-d')}}" value="">
+								                        <input type="hidden" name="filters" value="{{$filters}}">
+								                         <input type="hidden" name="alias" value="{{($company->alias)}}">
+								                        <input type="hidden" name="slotValue" id="slotValue-{{$date->format('Y-m-d')}}" value="">
+								                        <div class="total-price-modal hidden" id="total-price-{{$date->format('Y-m-d')}}">{{session('currency')}}</div>
+								                        <div class="text-center"> 
+								                             @if (Auth::check())
+								                                <button class="btn btn-default btn-slot " id="button-{{$date->format('Y-m-d')}}" disabled type="submit">{{trans('webapp.choose_spot')}}</button></div>
+								                            @else 
+								                                 <button class="btn btn-default btn-slot no-auth" id="button-{{$date->format('Y-m-d')}}" disabled type="submit">{{trans('webapp.choose_spot')}}</button></div>
+								                            @endif 
+
+								                          <div class="padd10t size12 text-center hidden no-charge" id="no-charge-{{$date->format('Y-m-d')}}">{{ trans('webapp.no_charge_now')}}</div>
+								                    </form>
+								                @elseif ($route == "internal")
+								                    <a href="#" class="btn-slot" data-reflect="price" data-layer="self" data-form-from="form-{!!$service->id!!}" data-form-to="form1" data-form="form-{!!$service->id!!}" data-after={{(session('groupsno') == 1)? 'vehicle_select' : 'vehicle_category_select'}} data-value="0" data-rategroup="{{$service->id}}-{{$date->format('Y-m-d')}}" >
+								                         <div class="total-price-modal hidden" id="total-price-{{$date->format('Y-m-d')}}">{{session('currency')}}</div>
+								                         <button class="btn btn-default btn-slot " id="button-{{$date->format('Y-m-d')}}" disabled type="button">{{trans('webapp.choose_spot')}}</button>
+								                    </a>
+								                @elseif ($route == "order-edit")
+								                         <div class="total-price-modal " id="total-price-{{$date->format('Y-m-d')}}">{{session('currency')}}</div>
+								                         <button class="btn btn-default btn-slot order-edit-submit " id="button-{{$date->format('Y-m-d')}}"  disabled type="button">{{trans('webapp.choose_spot')}}</button>
+								                @endif 
+								            </div>
+								        </div>
+								       #}
+								       
+
+								    {% endif %} 
+								{% endfor %}
+
+
+							</div>
+						{% endif %}
+					{# ------------------ DAILY & PER MILE -----------------------------#}
+					{% else %}
+						{% if ((service.total_availability) and (service.total_price))	 %}
+							{% if ((service.total_price | length  > 1) and (service.total_price) and (service.total_price | length  > 1) and ((max(service.total_price) != 0) and (min(service.total_price) != 0))) %}
+								{% if (min(service.total_price) == max(service.total_price)) %}
+									{# --  Select from multiple providers with same price range -- #}
+									<div class="service-prices">
+										<span class = "currency">{{currency}}</span><span class="service-total">{{max(service.total_price)}}</span> 
+										<div class="service-cost-day"> 
+											{# trans('webapp.tr_for')}} {{$timeDifferenceReadable #}
+										</div>
+									</div>
+									<div class="service-book">
+										<a href="#" class="book-button btn-blue select-providers" data-toggle="modal" data-id="{{service.id}}" data-target="#selectDatesModal" data-data="" data-total="" data-start="" data-end="" data-period="" data-filters = "" > <i class="fa fa-calendar"></i> Book  </a>
+									</div>
+								{% else %}
+									{#--  Select from multiple providers with different price range -- 
+									<div class="service-prices">
+										<span class = "currency">{{currency}}</span><span class="service-total">{{min(service.total_price)}}</span> - <span class = "currency">{{currency}}</span><span class="service-total">{{max(service.total_price)}}</span> 
+										<div class="service-cost-day"> 
+											 trans('webapp.tr_for')}} {{$timeDifferenceReadable 
+										</div>
+									</div>#}
+									<div class="service-book">
+										<a href="#" class="book-button btn-blue select-providers" data-toggle="modal" data-id="{{service.id}}" data-target="#selectDatesModal" data-data="" data-start="" data-end="" data-period="" data-filters =  > <i class="fa fa-calendar"></i> book </a>
+									</div>
+								{% endif %}
+							{%else%} 
+							
+								{% set keys = service.total_price|keys %}
+								{% if ((service.total_availability) and (service.type == 'permile')) %}
+									{% set legend = attribute(service.units, keys[0]) ~
+											  '<div class="size12">' ~
+												tr_distance ~
+												': ' ~ attribute(service.distance, keys[0]).distance ~
+												', ' ~ tr_duration ~
+												': ' ~ attribute(service.distance, keys[0]).duration.text ~
+											 	'</div>' %}
+									{% set legendShort = attribute(service.units, keys[0]) %}
+								{% elseif ((service.total_availability) and (service.type == 'daily')) %}
+									{% set legend =  timeDifferenceReadable %}
+									{% set legendShort = legend %}
+								{% else %} 
+									{% set legend =  attribute(service.units, keys[0]) %}
+									{% set legendShort = legend %}
+								{% endif %}	
+
+
+								{#--  Select from one provider and procced to direct booking --#}
+								<div class="service-prices">
+									<span class = "currency">{{currency}}</span><span class="service-total">{{max(service.total_price)}}</span> 
+									<div class="service-cost-day"> 
+										{{legend | raw }}
+									</div>
+								</div>
+								<div class="service-book">
+									<div class="select-providers hidden" data-data="" data-id="" data-filters ="" data-start="" data-end="" data-period="" > </div>
+										
+					                     <div class="col-md-12 col-xs-12" >
+					                     	<a href="{{detailsURL}}?{{queryString}}&amp;service_id={{service.id}}&amp;totalDays={{totalDays}}&amp;selectedRategroup={{keys[0]}}" class="btn btn-primary book-button text-center" id="load" data-loading-text='{{tr_loading}} <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>'>{{tr_button}} <i class="fa fa-check green"></i></a> 
+					                     </div>
+										
+			                        	<div class="padd10t size12 text-center">{{tr_no_charge}}</div>
+				                    
+			                  	</div>
+							{% endif %}
+						{% endif %}
+					{% endif %}
+
+
+
+
+
+					{# ------------------------  OLD WAY -------------------------- 
+						{% if service.total_availability %}
+
+						<div class="service-prices">
+							<span class = "currency">{{currency}}</span><span class="service-total">{{service.total_price}}</span> 
+							{% if type == "activity" %}
+								<div class="service-cost-day"> 
+									{{tr_for}} {{paxReadable}}
+								</div>
+							{% elseif hide_locations == true  %}
+								<div class="service-cost-day"> /div>
+							{% else %}	
+								<div class="service-cost-day"> 
+									{{tr_for}} {{timeDifferenceReadable}}
+								</div>
+							{% endif %}	
+						</div>
+
+					
+						<div class="service-book">
+							<a href="{{detailsURL}}?{{queryString}}&amp;service_id={{service.id}}&amp;totalDays={{totalDays}}" class="book-button" id="load" data-loading-text='{{tr_loading}} <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>'>{{tr_button}}</a>
+							{% if paymenetPercent > 0 and paymenetPercent < 100 %}
+								<div class="paynow-search"> {{ tr_paynow }}: {{currency}}{{ (service.total_price * (paymenetPercent / 100))|number_format(2)}}  </div>
+							{% endif %}
+							{% if cash == "on" %}
+								<div class="cash-search"> {{ tr_cash }} </div>
+							{% endif %}
+						</div>
+
+					{% endif %}	
+						#}
+
+
+
+
+				</div>
+			</div>
+			
+
+			{# --------------------- CALENDAR ----------------------------------- #}
+
+			{% if results_calendar_mode == 'display' and service.type == "daily" %}
+				<div class="row">
+					<div class="col-md-12"> 
+						<div class="calendar">
+							<div class="col-xs-12 calendar-period text-center">{{startOfWeek}} - {{endOfPeriod}}</div>
+							<div class="col-xs-12 days"> 
+
+								{% for i in 0..6  %}
+									{% set myDate = startOfWeekDate|date_modify('+' ~ i ~ ' days')|date('Y-m-d')%}
+									{% if service.availabilities_and_rates[myDate].rates[keys[0]].weekday==5 or service.availabilities_and_rates[myDate].rates[keys[0]].weekday==6  %}
+										<div class="text-center day-cell-title col-cell weekend"> {{service.availabilities_and_rates[myDate].rates[keys[0]].weekdayname}} </div>
+									{% else %}
+										<div class="text-center day-cell-title col-cell "> {{service.availabilities_and_rates[myDate].rates[keys[0]].weekdayname}} </div>
+									{% endif %}
+								{% endfor %}
+								<span class="hidden-xs">
+									{% for i in 0..6  %}
+										{% set myDate = startOfWeekDate|date_modify('+' ~ i ~ ' days')|date('Y-m-d')%}
+										{% if service.availabilities_and_rates[myDate].rates[keys[0]].weekday==5 or service.availabilities_and_rates[myDate].rates[keys[0]].weekday==6 %}
+											<div class="text-center day-cell-title col-cell weekend"> {{service.availabilities_and_rates[myDate].rates[keys[0]].weekdayname}} </div>
+										{% else %}
+											<div class="text-center day-cell-title col-cell "> {{service.availabilities_and_rates[myDate].rates[keys[0]].weekdayname}} </div>
+										{% endif %}
+									{% endfor %}
+								</span>
+								{% for i in 0..27  %}
+									{% set myDate = startOfWeekDate|date_modify('+' ~ i ~ ' days')|date('Y-m-d')%}
+									{% if date(service.availabilities_and_rates[myDate].rates[keys[0]].date)|date("YYYY-mm-dd")>=date(pickup_date_time)|date("YYYY-mm-dd") and date(service.availabilities_and_rates[myDate].rates[keys[0]].date)|date("YYYY-mm-dd") <= date(return_date_time)|date("YYYY-mm-dd") %}
+										{% if date(service.availabilities_and_rates[myDate].rates[keys[0]].date)|date("YYYY-mm-dd")==date(pickup_date_time)|date("YYYY-mm-dd") %}
+											{% if service.total_availability %}
+												<div class="text-center day-cell col-cell selected-period start"> 
+													<a href="#" data-date="{{service.availabilities_and_rates[myDate].rates[keys[0]].date}}" data-days={{timeDifferenceReadable[:2]}}>{{service.availabilities_and_rates[myDate].rates[keys[0]].day}}</a>
+												</div>
+											{% else %}
+												<div class="text-center day-cell col-cell selected-period-no-avail start"> 
+													{{service.availabilities_and_rates[myDate].rates[keys[0]].day}}
+												</div>
+											{% endif %}
+										{% elseif date(service.availabilities_and_rates[myDate].rates[keys[0]].date)|date("YYYY-mm-dd") == date(return_date_time)|date("YYYY-mm-dd")%}
+											{% if service.total_availability %}
+												<div class="text-center day-cell col-cell selected-period end"> 
+													<a href="#" data-date="{{service.availabilities_and_rates[myDate].rates[keys[0]].date}}" data-days={{timeDifferenceReadable[:2]}}>{{service.availabilities_and_rates[myDate].rates[keys[0]].day}}</a>
+												</div>
+											{% else %}
+												<div class="text-center day-cell col-cell selected-period-no-avail end"> 
+													{{service.availabilities_and_rates[myDate].rates[keys[0]].day}}
+												</div>
+											{% endif %}
+										{% else %}
+											{% if service.total_availability %}
+												<div class="text-center day-cell col-cell selected-period"> 
+													<a href="#" data-date="{{service.availabilities_and_rates[myDate].rates[keys[0]].date}}" data-days={{timeDifferenceReadable[:2]}}>{{service.availabilities_and_rates[myDate].rates[keys[0]].day}}</a>
+												</div>
+											{% else %}
+												<div class="text-center day-cell col-cell selected-period-no-avail"> 
+													{{service.availabilities_and_rates[myDate].rates[keys[0]].day}}
+												</div>
+											{% endif %}
+										{%endif %}
+									{% else %}
+										<div class="text-center day-cell col-cell">
+											{%if service.availabilities_and_rates[myDate].rates[keys[0]].availability > 0 %} 
+												<a href="#" data-date="{{service.availabilities_and_rates[myDate].rates[keys[0]].date}}" data-days={{timeDifferenceReadable[:2]}}>{{service.availabilities_and_rates[myDate].rates[keys[0]].day}}</a>
+											{% else %}
+												{{service.availabilities_and_rates[myDate].rates[keys[0]].day}}
+											{%endif%}
+										</div>
+									{% endif %}
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				</div>
+			{%endif%} 
+			{# ----------------  END CALENDAR #}
+		</div>
+	{%endif%}
+{% endfor %}
+{% if emptyRates == 'true' %}
+	<div class="col-md-12 text-center">
+		<h2>{{tr_no_results}}</h2>
+	</div>
+{% endif %}
+<script type="text/javascript">
+	jQuery('#wp-rengine-loader').addClass('hidden');
+</script>
+
