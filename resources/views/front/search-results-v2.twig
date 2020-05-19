@@ -55,48 +55,58 @@
 				{% else %}
 					<div class="col-xs-12 col-md-6 main-block">
 				{% endif %}
-				
-					<h2 class="padd10t">{{service.title}}</h2>
+					<div class="col-md-12">
+						<h2 class="padd10t">{{service.title}}</h2>
+					</div>
 					<div class="slide-flag text-uppercase"><strong>{{service.text_flag}} </strong></div>
-					<div class="service-group">{{service.group.name}}</div>
-					<div class="service-attributes">
-						<ul class="list-inline">
-						{% for attribute in service.attributes %}
-							{% if loop.last %}
-								<li>
-									{% if attribute.media_type == 'image' %}
-										<img style="max-width:25px;" src="{{attribute.media}}" alt="{{attribute.media}}"> {{attribute.value}} {{attribute.name}}
-									{% elseif attribute.media_type == 'icon' %}
-										{{attribute.media | raw }} {{attribute.value}} {{attribute.name}}
-									{% else %}
-										{{attribute.value}} {{attribute.name}}
-									{% endif %}
-								</li>
-							{% else %}
-								<li>
-									{% if attribute.media_type == 'image' %}
-										<img style="max-width:25px;" src="{{attribute.media}}" alt="{{attribute.media}}"> {{attribute.value}} {{attribute.name}}
-									{% elseif attribute.media_type == 'icon' %}
-										{{attribute.media | raw }} {{attribute.value}} {{attribute.name}}
-									{% else %}
-										{{attribute.value}} {{attribute.name}}
-									{% endif %}
-									
-								</li>
-							{% endif %}
-						{% endfor %}
-						</ul>
+					<div class="col-md-12">
+						<div class="service-group">{{service.group.name}}</div>
+					</div>
+					<div class="col-md-12">
+						<div class="service-attributes">
+							<ul class="list-inline">
+							{% for attribute in service.attributes %}
+								{% if loop.last %}
+									<li>
+										{% if attribute.media_type == 'image' %}
+											<img style="max-width:25px;" src="{{attribute.media}}" alt="{{attribute.media}}">{{attribute.name}} {{attribute.value}} 
+										{% elseif attribute.media_type == 'icon' %}
+
+											{% if 'fa-' in attribute.media |raw  %}
+												{{attribute.media | raw }} {{attribute.name}} {{attribute.value}} 
+											{% else %}
+												{{attribute.name}} {{attribute.value}}
+											{% endif %}
+										{% else %}
+											{{attribute.name}} {{attribute.value}} 
+										{% endif %}
+									</li>
+								{% else %}
+									<li>
+										{% if attribute.media_type == 'image' %}
+											<img style="max-width:25px;" src="{{attribute.media}}" alt="{{attribute.media}}">{{attribute.name}} {{attribute.value}} 
+										{% elseif attribute.media_type == 'icon' %}
+											{{attribute.media | raw }} {{attribute.name}} {{attribute.value}} 
+										{% else %}
+											{{attribute.name}} {{attribute.value}} 
+										{% endif %}
+										
+									</li>
+								{% endif %}
+							{% endfor %}
+							</ul>
+						</div>
 					</div>
 					
 					{% if service.description %}
-						<div class="row">
+						<div class="col-md-12">
 							<div class="service-attributes">
 							<div class="col-xs-12">{{service.description}}</div>
 							</div>
 						</div>
 					{% endif %}
 					{% if service.includes  %}
-						<div class="row">
+						<div class="col-md-12">
 							<div class="service-attributes">
 								<div class="col-xs-12 black"><strong>{{tr_includes}}:</strong> </div>
 								<div class="col-xs-12">{{service.includes}}</div>
@@ -104,7 +114,7 @@
 						</div>	
 					{% endif %}
 					{% if service.excludes  %}
-						<div class="row">
+						<div class="col-md-12">
 							<div class="service-attributes">
 								<div class="col-xs-12 black"><strong>{{tr_excludes}}:</strong></div>
 								<div class="col-xs-12">{{service.excludes}}</div>

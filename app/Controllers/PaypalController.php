@@ -56,7 +56,7 @@ class PaypalController
 			[
 				'mode'           => $PayPalMode ,
 				'log.LogEnabled' => true,
-				'log.FileName'   => 'wp-content/PayPal.log',
+				'log.FileName'   => 'wp-content/plugins/reservation-engine/PayPal.log',
 				'log.LogLevel'   => $logLevel, // PLEASE USE `INFO` LEVEL FOR LOGGING IN LIVE ENVIRONMENTS
 				'cache.enabled'  => false,
 				// 'http.CURLOPT_CONNECTTIMEOUT' => 30

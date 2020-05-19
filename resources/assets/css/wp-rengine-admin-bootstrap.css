@@ -6016,6 +6016,7 @@
   filter: alpha(opacity=0);
   opacity: 0;
 }
+
 .wp-rengine-admin .modal-backdrop.in {
   filter: alpha(opacity=50);
   opacity: .5;

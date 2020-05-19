@@ -619,6 +619,23 @@ jQuery(document).on('click touchend', '#creditCard', function(event) {
 	jQuery('#digest').val(jQuery('#digest1').val());
 });
 
+jQuery(document).on('click touchend', '#payment_cash', function(event) {
+	jQuery('#cash-button').removeClass('hidden');
+	jQuery('#gateway-button').addClass('hidden');
+});
+
+jQuery(document).on('click touchend', '.pay-gateway', function(event) {
+	jQuery('#cash-button').addClass('hidden');
+	jQuery('#gateway-button').removeClass('hidden');
+
+});
+
+jQuery(document).on('click touchend', '.pay-gateway', function(event) {
+	jQuery('#cash-button').addClass('hidden');
+	jQuery('#gateway-button').removeClass('hidden');
+	
+});
+
 
 function predictionsCallback(predictions, status) {
 	if (status != google.maps.places.PlacesServiceStatus.OK) {

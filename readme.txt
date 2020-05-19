@@ -3,8 +3,8 @@ Contributors: xitegr
 Tags: car rental, booking engine, rent a car,  yacht bookings, doctors booking system, hotels bookings system, hairstylist, transfers, appointments, lawyer, reservation system, cleaning services
 Donate link: https://workadu.com
 Requires at least: 4.0
-Tested up to: 5.0
-Stable tag: 2.3.1
+Tested up to: 5.3.2
+Stable tag: 2.3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -103,6 +103,22 @@ Workadu plugin is available only for PHP 5.6 and over. If you get an installatio
 5. The screenshot describes the back-end panel configuration screen.
 
 == Changelog ==
+= 2.3.4 =
+* Bug fixes
+* Compatibility with wordpress 5.3.2
+* Update payment integrations APIs
+* Add multiple playments feature
+* Styling fixes 
+
+= 2.3.3 =
+* Bug fixes
+* Compatibility with wordpress 5.3
+
+== Changelog ==
+= 2.3.2 =
+* Bug fixes
+* Compatibility with php 7.3
+
 = 2.3.1 =
 * Bug Fixes
 

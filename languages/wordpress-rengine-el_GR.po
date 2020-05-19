@@ -253,7 +253,20 @@ msgid "excludes"
 msgstr "Δεν περιλαμβάνει"
 
 
+msgid "bill_city"
+msgstr "Πόλη"
 
+msgid "bill_zip"
+msgstr "ΤΚ"
+
+msgid "bill_country"
+msgstr "Χώρα"
+
+msgid "payment_methods"
+msgstr "Επιλέξτε μέθοδο πληρωμής"
+
+msgid "bill_address"
+msgstr "Διεύθυνση"
 
 
 

@@ -182,8 +182,7 @@ class AdminController {
 
 		if (($this->auth) && (!$this->company)) {
             try {
-            	
-                 $response   = $this->client->request('GET', 'companies?'.strtotime());
+                 $response   = $this->client->request('GET', 'companies?'.strtotime(true));
                  $this->company            = json_decode($response->getBody());
             } catch (\GuzzleHttp\Exception\RequestException $e) {
 
@@ -373,6 +372,11 @@ class AdminController {
 			$wpRenginePaymentPage			= Option::where('option_name', 'wpRenginePaymentPage')->first();
 			$wpRenginePaymentPercent		= Option::where('option_name', 'wpRenginePaymentPercent')->first();
 			$posts	 						= Post::where('post_status', 'publish')->get();
+			$wpRenginePaypal			   = Option::where('option_name', 'wpRenginePaypal')->first();
+			$wpRengineStripe			   = Option::where('option_name', 'wpRengineStripe')->first();
+			$wpRengineAlpha			       = Option::where('option_name', 'wpRengineAlpha')->first();
+			$wpRengineViva		           = Option::where('option_name', 'wpRengineViva')->first();
+
 			
 
 		
@@ -406,7 +410,11 @@ class AdminController {
 				'wpRengineGateway'				=> ($wpRengineGateway) ? $wpRengineGateway->option_value : 'none',
 				'wpRengineCash'					=> ($wpRengineCash) ? $wpRengineCash->option_value : 'on',
 				'wpRengineCashMode'				=> ($wpRengineCashMode) ? $wpRengineCashMode->option_value : 'yes',
-			
+				'wpRenginePaypal'			    => ($wpRenginePaypal) ? $wpRenginePaypal->option_value : 'false',
+				'wpRengineStripe'			    => ($wpRengineStripe) ? $wpRengineStripe->option_value : 'false',
+				'wpRengineAlpha'			    => ($wpRengineAlpha) ? $wpRengineAlpha->option_value : 'false',	
+				'wpRengineViva'			    	=> ($wpRengineViva) ? $wpRengineViva->option_value : 'false',
+		
 				'paypal'						=> Helper::assetUrl('/img/paypal.png'),
 				'stripe'						=> Helper::assetUrl('/img/stripe.png'),
 				'payzen'						=> Helper::assetUrl('/img/payzen.png'),
@@ -461,6 +469,7 @@ class AdminController {
 
 	public function saveConfiguration(Http $request) {
 		$error_messages = [];
+
 		try {
 			$wpRengineUser        			= Option::where('option_name', 'wpRengineUser')->first();
 			$wpRenginePassword    			= Option::where('option_name', 'wpRenginePassword')->first();
@@ -511,6 +520,10 @@ class AdminController {
 			$wpRenginePaymentPercent		= Option::where('option_name', 'wpRenginePaymentPercent')->first();
 			$wpRengineRecaptcha				= Option::where('option_name', 'wpRengineRecaptcha')->first();
 			$wpRengineApiVersion			= Option::where('option_name', 'wpRengineApiVersion')->first();
+			$wpRenginePaypal			   = Option::where('option_name', 'wpRenginePaypal')->first();
+			$wpRengineStripe			   = Option::where('option_name', 'wpRengineStripe')->first();
+			$wpRengineAlpha			       = Option::where('option_name', 'wpRengineAlpha')->first();
+			$wpRengineViva		           = Option::where('option_name', 'wpRengineViva')->first();
 
 		} catch (Exception $e) {
 			$error_messages[] = $e->getMessage();
@@ -536,6 +549,17 @@ class AdminController {
 				$wpRenginePassword->option_value = filter_var ( $request->input('wpRenginePassword'), FILTER_SANITIZE_STRING) ;
 			}
 			$wpRenginePassword->save();
+		}
+
+		if ($request->has('wpRenginePaypal')) {
+			if ($wpRenginePaypal) {
+				$wpRenginePaypal->option_value = $request->input('wpRenginePaypal');
+			} else {
+				$wpRenginePaypal               = new Option();
+				$wpRenginePaypal->option_name  = 'wpRenginePaypal';
+				$wpRenginePaypal->option_value = 'true';
+			}
+			$wpRenginePaypal->save();
 		}
 
 		if ($request->has('wpRenginePaypalClientId')) {
@@ -567,12 +591,23 @@ class AdminController {
 				$wpRenginePaypalMode               = new Option();
 				$wpRenginePaypalMode->option_name  = 'wpRenginePaypalMode';
 				$wpRenginePaypalMode->option_value = filter_var($request->input('wpRenginePaypalMode'), FILTER_SANITIZE_STRING); 
+				
+
 			}
 			$wpRenginePaypalMode->save();
 		}
 
 		// ALPHA
-
+		if ($request->has('wpRengineAlpha')) {
+			if ($wpRengineAlpha) {
+				$wpRengineAlpha->option_value = $request->input('wpRengineAlpha');
+			} else {
+				$wpRengineAlpha               = new Option();
+				$wpRengineAlpha->option_name  = 'wpRengineAlpha';
+				$wpRengineAlpha->option_value = 'true';
+			}
+			$wpRengineAlpha->save();
+		}
 		if ($request->has('wpRengineAlphaClientId')) {
 			if ($wpRengineAlphaClientId) {
 				$wpRengineAlphaClientId->option_value = $request->input('wpRengineAlphaClientId');
@@ -583,8 +618,6 @@ class AdminController {
 			}
 			$wpRengineAlphaClientId->save();
 		}
-
-
 
 		if ($request->has('wpRengineAlphaSecret')) {
 			if ($wpRengineAlphaSecret) {
@@ -609,6 +642,17 @@ class AdminController {
 		}
 
 		// STRIPE 
+		if ($request->has('wpRengineStripe')) {
+			if ($wpRengineStripe) {
+				$wpRengineStripe->option_value = $request->input('wpRengineStripe');
+			} else {
+				$wpRengineStripe               = new Option();
+				$wpRengineStripe->option_name  = 'wpRengineStripe';
+				$wpRengineStripe->option_value = 'true';
+			}
+			$wpRengineStripe->save();
+		}
+
 		if ($request->has('wpRengineStripeClientId')) {
 			if ($wpRengineStripeClientId) {
 				$wpRengineStripeClientId->option_value = $request->input('wpRengineStripeClientId');
@@ -699,6 +743,16 @@ class AdminController {
 		}
 
 		//VIVA PAYMENTS 
+		if ($request->has('wpRengineViva')) {
+			if ($wpRengineViva) {
+				$wpRengineViva->option_value = $request->input('wpRengineViva');
+			} else {
+				$wpRengineViva               = new Option();
+				$wpRengineViva->option_name  = 'wpRengineViva';
+				$wpRengineViva->option_value = 'true';
+			}
+			$wpRengineViva->save();
+		}
 		if ($request->has('wpRengineVivaClientId')) {
 			if ($wpRengineVivaClientId) {
 				$wpRengineVivaClientId->option_value = $request->input('wpRengineVivaClientId');
@@ -765,9 +819,8 @@ class AdminController {
 			if (!$wpRengineCashMode) {
 				$wpRengineCashMode               = new Option();
 				$wpRengineCashMode->option_name  = 'wpRengineCashMode';
+				$wpRengineCashMode->save();
 			}
-			$wpRengineCashMode->option_value = 'no';
-			$wpRengineCashMode->save();
 		}
 
 		if ($request->has('wpRengineCalendarMode')) {
@@ -838,9 +891,8 @@ class AdminController {
 			if (!$wpRengineCouponMode) {
 				$wpRengineCouponMode  = new Option();
 				$wpRengineCouponMode->option_name  = 'wpRengineCouponMode';
+				$wpRengineCouponMode->save();
 			}
-			$wpRengineCouponMode->option_value = 'hide';
-			$wpRengineCouponMode->save();
 		}
 
 		if ($request->has('wpRengineGroupMode') ) {
@@ -856,9 +908,9 @@ class AdminController {
 			if (!$wpRengineGroupMode) {
 				$wpRengineGroupMode  = new Option();
 				$wpRengineGroupMode->option_name  = 'wpRengineGroupMode';
+				$wpRengineGroupMode->save();
 			}
-			$wpRengineGroupMode->option_value = 'hide';
-			$wpRengineGroupMode->save();
+			
 		}
 
 		if ($request->has('wpRengineSlideMode')) {

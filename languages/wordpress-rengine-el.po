@@ -39,6 +39,12 @@ msgstr "ΑΛΛΑΓΗ ΗΜΕΡΟΜΗΝΙΩΝ"
 msgid "available_cars"
 msgstr "Διαθέσιμες υπηρεσίες"
 
+msgid "available_activities"
+msgstr "Διαθέσιμες υπηρεσίες"
+
+msgid "available_services"
+msgstr "Διαθέσιμες υπηρεσίες"
+
 msgid "from"
 msgstr "από"
 
@@ -62,6 +68,9 @@ msgstr "ΛΗΞΗ"
 
 msgid "no_results"
 msgstr "Δεν βρέθηκαν αποτελέσματα! Παρακαλούμε δοκιμάστε νέα αναζήτηση με άλλες ημερομηνίες."
+
+msgid "no_charge"
+msgstr "Δεν θα χρεωθείτε ακόμα"
 
 msgid "button"
 msgstr "ΕΠΙΛΟΓΗ"
@@ -189,3 +198,19 @@ msgstr "Πληρώστε τώρα"
 
 msgid "pay_now_dscr"
 msgstr "από το συνολικό ποσό και το υπόλοιπο κατά την παράδοση!"
+
+
+msgid "bill_city"
+msgstr "Πόλη"
+
+msgid "bill_zip"
+msgstr "ΤΚ"
+
+msgid "bill_country"
+msgstr "Χώρα"
+
+msgid "payment_methods"
+msgstr "Επιλέξτε μέθοδο πληρωμής"
+
+msgid "bill_address"
+msgstr "Διεύθυνση"

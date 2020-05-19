@@ -45,7 +45,6 @@
 					<h4 class="control-label">{{tr_group_mode}}</h4>
 					<select class="form-control" name="group">
 						<option value=""></option> 
-						<option value=""></option>
 						{% for group in groups %}
 							{% if group.id == group_id %}
 								<option value="{{group.id}}" selected>{{group.name}}</option>
@@ -148,7 +147,6 @@
 					<div class=" col-md-2 form-group tright">
 						<h4 class="control-label">{{tr_group_mode}}</h4>
 						<select class="form-control" name="group">
-							<option value=""></option> 
 							<option value=""></option>
 							{% for group in groups %}
 								{% if group.id == group_id %}

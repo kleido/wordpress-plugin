@@ -137,6 +137,10 @@
 						<input type="hidden" name="orderAmount" value="{{paymentData.data[6]}}"/>
 						<input type="hidden" name="currency" value="{{paymentData.data[7]}}"/>
 						<input type="hidden" name="payerEmail" value="{{paymentData.data[8]}}"/>
+						<input type="hidden" name="billCountry" value="{{paymentData.data[11]}}"/>
+						<input type="hidden" name="billZip" value="{{paymentData.data[13]}}"/>
+						<input type="hidden" name="billCity" value="{{paymentData.data[14]}}"/>
+						<input type="hidden" name="billAddress" value="{{paymentData.data[15]}}"/>
 						<input type="hidden" name="confirmUrl" value="{{paymentData.data[33]}}"/>
 						<input type="hidden" name="cancelUrl" value="{{paymentData.data[34]}}"/>
 						<div class="col-md-6 col-md-offset-3 col-xs-12 payMethod radio">
@@ -160,7 +164,7 @@
 	<div class="row">
 		<div class="col-md-12 text-center">
 			<h3>We are preparing your booking. Please wait...</h3>
-			<i class="fa-li fa fa-spinner fa-spin fa-3x"></i>
+			<div class="wprengine-loader" ><i class="fa-li fa fa-spinner fa-spin fa-3x"></i></div>
 		</div>
 	</div>
 	<div class="row">

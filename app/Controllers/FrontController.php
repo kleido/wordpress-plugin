@@ -24,8 +24,9 @@ class FrontController
             $base_uri = 'https://secure.reservationengine.net/rest/api/';
             $apiVersion = 'v1';
         } else {
-             // $base_uri = 'https://94fb148c.ngrok.io/reservationengine-fast/public/api/';
-            $base_uri = 'https://app.workadu.com/api/';  
+             // $base_uri = 'https://979183d6.ngrok.io/workadu/public/api/';
+            $base_uri = 'https://app.workadu.com/api/'; 
+            // $base_uri = 'http://stage.reservationengine.net/api/';  
             $apiVersion = 'v2';
         }
         $this->setAuth();
@@ -234,6 +235,7 @@ class FrontController
             if (empty($group)) {
                 $group = "";
             }
+         
             if ($type == '') {
                 if (empty($proffesion)) {
                     $type= "rentals";
@@ -364,7 +366,7 @@ class FrontController
 
   public function getAllGroups()
     {
-        $response = $this->client->request('GET', 'groups');
+        $response = $this->client->request('GET', 'groups?sort=sort');
         return json_decode($response->getBody());
     }
 
@@ -1232,8 +1234,14 @@ class FrontController
                     $page = pll_get_post($page->ID);
                 }
                 $payment_gateway    = Option::where('option_name', 'wpRengineGateway')->first()->option_value;
-                if (!$payment_gateway) {
+                 $payment_paypal    = Option::where('option_name', 'wpRenginePaypal')->first()->option_value;
+                 $payment_stripe    = Option::where('option_name', 'wpRengineStripe')->first()->option_value;
+                $payment_alpha    = Option::where('option_name', 'wpRengineAlpha')->first()->option_value;
+                 $payment_viva    = Option::where('option_name', 'wpRengineViva')->first()->option_value;
+                if ((!$payment_gateway) && (!$payment_viva) && (!$payment_paypal) && (!$payment_alpha) && (!$payment_stripe))  {
                     $payment_gateway = 'false';
+                } else {
+                    $payment_gateway = 'true';
                 }
                 $wpRengineRecaptcha = Option::where('option_name', 'wpRengineRecaptcha')->first()->option_value;
                 if ($this->version == 'v2') {
@@ -1319,9 +1327,25 @@ class FrontController
                     'tr_laststep'           => __('last_step', 'wordpress-rengine' ),
                     'tr_paynow'             => __('pay_now', 'wordpress-rengine' ),
                     'tr_paynow_dscr'        => __('pay_now_dscr', 'wordpress-rengine' ),
+                    'tr_billAddress'        => __('bill_address', 'wordpress-rengine' ),
+                    'tr_billCity'           => __('bill_city', 'wordpress-rengine' ),
+                    'tr_billZip'            => __('bill_zip', 'wordpress-rengine' ),
+                    'tr_billState'          => __('bill_state', 'wordpress-rengine' ),
+                    'tr_billCountry'         => __('bill_country', 'wordpress-rengine' ),
+                    'tr_payment_methods'     => __('payment_methods', 'wordpress-rengine' ),
                     'paymenetPercent'       => $wpRenginePaymentPercent,
                     'payment_gateway'       => $payment_gateway,
                     'recapcha'              => $wpRengineRecaptcha,
+                    'payment_viva'          => $payment_viva,
+                    'payment_alpha'         => $payment_alpha, 
+                    'payment_paypal'        => $payment_paypal,
+                    'payment_stripe'        => $payment_stripe,
+                    'paypal'                => Helper::assetUrl('/img/paypal.png'),
+                    'stripe'                => Helper::assetUrl('/img/stripe.png'),
+                    'payzen'                => Helper::assetUrl('/img/payzen.png'),
+                    'viva'                  => Helper::assetUrl('/img/vivapayments.png'),
+                    'alpha'                 => Helper::assetUrl('/img/alpha-logo.png'),
+                    'cash_img'                  => Helper::assetUrl('/img/cashondelivery.png'),
                 ]);
             }else {
                 return [];
@@ -1425,7 +1449,12 @@ class FrontController
             $requestData['mobile-email']        = filter_var ($http->get('tel') . ' ' . $email, FILTER_SANITIZE_STRING); 
             $requestData['service_id']          = (int)$http->get('service_id');
             $requestData['send-notifications']  = '1';
-            $requestData['send-confirmation']   = $wpRengineCashMode;
+            if ($http->get('cashProcess') == 1) {
+                $requestData['send-confirmation']   = $wpRengineCashMode;
+            } else {
+                $requestData['send-confirmation']   = 0;
+            }
+            
             $requestData['cash']                = $http->get('cashProcess');
             $requestData['comment']             = $http->get('flight-number');
             $requestData['selected_slots']      = $http->get('selectedSlots');
@@ -1450,9 +1479,8 @@ class FrontController
             $returnUrl                          = get_permalink($page). '?order_id=' . $order['id'];
             $cancelUrl                          = $returnUrl . '&cancel=1';
             $currencyISO                        = $this->company->data[0]->currency_iso;
-            $gateway                            = Option::where('option_name', 'wpRengineGateway')->first()->option_value; 
+            $gateway                            = filter_var ($http->get('payMethod')) ;
             $wpRenginePaymentPercent            = Option::where('option_name', 'wpRenginePaymentPercent')->first()->option_value;
-
             if ($http->get('cashProcess') == 0) {
                 if ($gateway == 'paypal') {
                     // ------------------------- PAYMENT GATEWAY MODE --------------------------------
@@ -1461,13 +1489,13 @@ class FrontController
 
                     if ($this->PaypalApiCurrencySupport($currencyISO)) {
                     $currency           = $currencyISO;
-                    if (($wpRenginePaymentPercent >0) && ($wpRenginePaymentPercent < 100)) {
-                        $totalCost          = number_format((float)($order['total_cost']*$wpRenginePaymentPercent/100), 2);
-                    } else {
-                        $totalCost          = $order['total_cost'];
-                    }
+                        if (($wpRenginePaymentPercent >0) && ($wpRenginePaymentPercent < 100)) {
+                            $totalCost          = number_format((float)($order['total_cost']*$wpRenginePaymentPercent/100), 2);
+                        } else {
+                            $totalCost          = $order['total_cost'];
+                        }
 
-                    $exchangeMessage    = '';
+                        $exchangeMessage    = '';
                     } else {
                         //Paypal REST API doesnot support all currencies see https://developer.paypal.com/webapps/developer/docs/integration/direct/rest-api-payment-country-currency-support/
                         // $XML=simplexml_load_file("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22EUR".$currencyISO."%22)&env=store://datatables.org/alltableswithkeys");
@@ -1542,14 +1570,18 @@ class FrontController
                     $form_data_array[1]  = $merchanndid;                    //Req
                     $form_data_array[4]  = $order['id'];               //Req
                     if ($mode == 'live') {
-                        $form_data_array[6]  =$totalCost;              //Req
+                        $form_data_array[6]  = $totalCost;              //Req
                     } else {
                         $form_data_array[6]  = 0.10;
                     }
                     $form_data_array[7]  = $currencyISO;            //Req
                     $form_data_array[8]  = $email; 
+                    $form_data_array[11]  = filter_var ($http->get('billCountry'));
+                    // $form_data_array[12]  = filter_var ($http->get('billState'));
+                    $form_data_array[13]  = filter_var ($http->get('billZip'));
+                    $form_data_array[14]  = filter_var ($http->get('billCity'));
+                    $form_data_array[15]  = filter_var ($http->get('billAddress')) ;    //Req
                          //Req
-                          //Req
                     $form_data_array2   = $form_data_array;
                     $form_data_array[33] = $returnUrl.'&gateway=alpha';           //Req
                     $form_data_array[34] = $cancelUrl.'&gateway=alpha';    
@@ -1668,6 +1700,7 @@ class FrontController
     public function wpRenginePaymentShortcode(Http $http)
     {   
         $wpRenginePaymentPercent            = Option::where('option_name', 'wpRenginePaymentPercent')->first()->option_value;
+
         if (($http->get('order_id') != null) || ($http->get('order') != null)) {
             if ($http->get('gateway') == "stripe") {
                 $stripe = array(
@@ -1880,9 +1913,20 @@ class FrontController
                         $response       = $this->client->request('GET', 'orders/'.$return['orderid']);
                         $order          = json_decode($response->getBody(), true);
                         $order          = $order['data'];
-                        if ($order[0]['status'] != 'CANCELLED') {
-                            $renginePayment = $this->client->request('POST', 'payments', ['form_params' => ['order_id' => $return['orderid'], 'payment_gateway' => 'alpha', 'payment_reference' => $return['paymentRef'], 'deposit'=>    $wpRenginePaymentPercent.'%', 'send-notifications' => 1]]);
 
+                        if ($order[0]['status'] != 'CANCELLED') {
+
+                             try {
+                                  $renginePayment = $this->client->request('POST', 'payments', ['form_params' => ['order_id' => $return['orderid'], 'payment_gateway' => 'alpha', 'payment_reference' => $return['paymentRef'], 'deposit'=>    $return['paymentTotal'], 'send-notifications' => 1]]);
+                            } catch (RequestException $e) {
+                                echo Psr7\str($e->getRequest());
+                                if ($e->hasResponse()) {
+                                    echo Psr7\str($e->getResponse());
+                                }
+                            }
+                            if (!$renginePayment) {
+                                return $this->cancelBooking($order);
+                            }
                             return view('@WPRengine/front/payment.twig', [
                                 'resultPayPal'          => $paymentId,
                                 'renginePayment'        => $renginePayment,

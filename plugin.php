@@ -4,7 +4,7 @@
  * Plugin Name:       Workadu Reservation Engine
  * Plugin URI:        http://www.workadu.com/car-rental-software
  * Description:       A plugin to integrate the Workadu's API into Wordpress
- * Version:           2.3.1
+ * Version:           2.3.4
  * Author:            X!TE Communication Agency L.t.d
  * Author URI:        https://www.workadu.com/car-rental-software
  * License:           MIT

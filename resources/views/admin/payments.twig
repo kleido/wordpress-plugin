@@ -54,7 +54,7 @@
 							<div class="col-md-4 padd30t">
 								Turn On/Off Stripe
 								<label class="switch">
-									{% if options.wpRengineGateway == "stripe" %}
+									{% if options.wpRengineGateway == "stripe" or options.wpRengineStripe == "true" %}
 								  		<input type="checkbox" id="stripe" checked>
 								  	{% else %}
 								  		<input type="checkbox" id="stripe">
@@ -62,7 +62,7 @@
 								  <div class="slider round"></div>
 								</label>
 							</div>
-							{% if options.wpRengineGateway == "stripe" %}
+							{% if options.wpRengineGateway == "stripe" or options.wpRengineStripe == "true" %}
 								<div class="col-md-12 stripe-settings">
 						  	{% else %}
 						  		<div class="col-md-12 stripe-settings" hidden>
@@ -97,7 +97,7 @@
 							<div class="col-md-4 padd30t">
 								Turn On/Off Paypal
 								<label class="switch">
-									{% if options.wpRengineGateway == "paypal" %}
+									{% if options.wpRengineGateway == "paypal" or options.wpRenginePaypal == "true"%}
 								  		<input type="checkbox" id="paypal" checked>
 								  	{% else %}
 								  	<input type="checkbox" id="paypal">
@@ -105,7 +105,7 @@
 								  <div class="slider round"></div>
 								</label>
 							</div>
-							{% if options.wpRengineGateway == "paypal" %}
+								{% if options.wpRengineGateway == "paypal" or options.wpRenginePaypal == "true"%}
 								<div class="col-md-12 paypal-settings" >
 							{% else %}
 								<div class="col-md-12 paypal-settings" hidden>
@@ -141,7 +141,7 @@
 							<div class="col-md-4 padd30t">
 								Turn On/Off VivaPayments
 								<label class="switch">
-									{% if options.wpRengineGateway == "viva" %}
+									{% if options.wpRengineGateway == "viva" or  options.wpRengineViva == "true" %}
 								  		<input type="checkbox" id="viva" checked>
 								  	{% else %}
 								  	<input type="checkbox" id="viva">
@@ -149,7 +149,7 @@
 								  <div class="slider round"></div>
 								</label>
 							</div>
-							{% if options.wpRengineGateway == "viva" %}
+							{% if options.wpRengineGateway == "viva" or  options.wpRengineViva == "true" %}
 								<div class="col-md-12 viva-settings" >
 							{% else %}
 								<div class="col-md-12 viva-settings" hidden>
@@ -178,61 +178,6 @@
 							</div>
 						</div>
 
-
-						
-						<div class="form-group col-sm-12 borderd">
-							<div class="col-md-8">
-								<img src={{ options.payzen }} height="81px;" > 
-							</div>
-							<div class="col-md-4 padd30t">
-								Turn On/Off Payzen
-								<label class="switch">
-									{% if options.wpRengineGateway == "payzen" %}
-								  		<input type="checkbox" id="payzen" checked>
-								  	{% else %}
-								  		<input type="checkbox" id="payzen">
-								  	{% endif %}
-								  <div class="slider round"></div>
-								</label>
-							</div>
-							{% if options.wpRengineGateway == "payzen" %}
-								<div class="col-md-12 payzen-settings">
-						  	{% else %}
-						  		<div class="col-md-12 payzen-settings" hidden>
-						  	{% endif %}
-								<h4>Payzen Settings (beta)</h4>
-								<label for="wpRenginePayzenMode">Payzen Mode: </label>
-								{% if options.wpRenginePayzenMode == "sandbox" %}
-									 <input type="radio" name="wpRenginePayzenMode" id="wpRenginePayzenMode" value="sandbox" checked="checked"> Demo
-									 <input type="radio" name="wpRenginePayzenMode" id="wpRenginePayzenMode" value="live"> Live<br>
-								{% else %}
-									 <input type="radio" name="wpRenginePayzenMode" id="wpRenginePayzenMode" value="sandbox" > Demo
-	 							 	<input type="radio" name="wpRenginePayzenMode" id="wpRenginePayzenMode" value="live" checked="checked"> Live<br>
-	 							 {% endif %}
-								<p class="help-block">Please choose test for Demo enviroment. In test mode use your demo API credentials below.</p>
-								<div class="form-group col-sm-12">
-									<label for="wpRenginePayzenUsername">Payzen Username</label></br>
-									<input type="text" class="form-control" id="wpRenginePayzenUsername" name="wpRenginePayzenUsername" value="{{options.wpRenginePayzenUsername}}">
-									<p class="help-block">Type here your Payzen Username (Utilisateur)</p>
-								</div>
-								<div class="form-group col-sm-12">
-									<label for="wpRenginePayzenClientId">Payzen Public Key</label></br>
-									<input type="text" class="form-control" id="wpRenginePayzenClientId" name="wpRenginePayzenClientId" value="{{options.wpRenginePayzenClientId}}">
-									<p class="help-block">Type here your Payzen Public key (wihtout your username)</p>
-								</div>
-								<div class="form-group col-sm-12">
-									<label for="wpRenginePayzenSecret">Payzen Private Key</label>
-									<input type="text" class="form-control" id="wpRenginePayzenSecret" name="wpRenginePayzenSecret" value="{{options.wpRenginePayzenSecret}}">
-									<p class="help-block">Type here your Payzen Private key</p>
-								</div>
-								<div class="form-group col-sm-12">
-									<label for="wpRenginePayzenReturnKey">Payzen Return Key (or Sha256key)</label>
-									<input type="text" class="form-control" id="wpRenginePayzenReturnKey" name="wpRenginePayzenReturnKey" value="{{options.wpRenginePayzenReturnKey}}">
-									<p class="help-block">Type here your Payzen Return key</p>
-								</div>
-							</div>
-						</div>
-
 						<div class="form-group col-sm-12 borderd">
 							<div class="col-md-8">
 								<img src={{ options.alpha }} > 
@@ -240,7 +185,8 @@
 							<div class="col-md-4 padd30t">
 								Turn On/Off Alpha Bank
 								<label class="switch">
-									{% if options.wpRengineGateway == "alpha" %}
+									{% if options.wpRengineGateway == "alpha" or options.wpRengineAlpha == "true"
+									 %}
 								  		<input type="checkbox" id="alpha" checked>
 								  	{% else %}
 								  	<input type="checkbox" id="alpha">
@@ -248,7 +194,8 @@
 								  <div class="slider round"></div>
 								</label>
 							</div>
-							{% if options.wpRengineGateway == "alpha" %}
+							{% if options.wpRengineGateway == "alpha" or options.wpRengineAlpha == "true"
+									 %}
 								<div class="col-md-12 alpha-settings" >
 							{% else %}
 								<div class="col-md-12 alpha-settings" hidden>
@@ -337,5 +284,10 @@
 		</div>
 	</div>
 	<input type="hidden" id="wpRengineGateway" name="wpRengineGateway" value="{{options.wpRengineGateway}}">
+	<input type="hidden" id="wpRengineAlpha" name="wpRengineAlpha" value="{{options.wpRengineAlpha}}">
+	<input type="hidden" id="wpRenginePaypal" name="wpRenginePaypal" value="{{options.wpRenginePaypal}}">
+	<input type="hidden" id="wpRengineStripe" name="wpRengineStripe" value="{{options.wpRengineStripe}}">
+	<input type="hidden" id="wpRengineViva" name="wpRengineViva" value="{{options.wpRengineViva}}">
+
 	<input type="hidden" id="wpRengineCash" name="wpRengineCash" value="{{options.wpRengineCash}}">
 	</form>

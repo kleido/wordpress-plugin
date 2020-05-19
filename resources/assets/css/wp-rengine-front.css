@@ -33,7 +33,7 @@ h4 { color: #767676 !important; }
 	box-shadow: 0 0 16px 1px rgba(226, 230, 236, 0.9)
 }
 .service-name {
-	font-size:34px;
+	font-size:18px;
 	padding-top: 30px;
 	font-weight: 700;
 }
@@ -103,9 +103,17 @@ h4 { color: #767676 !important; }
 }
 .service-attributes .list-inline li {
 	padding-bottom: 0px;
-	padding-left: 2px;
+	padding-left: 0px;
 	padding-right: 0px;
 	/*display: inline;*/
+	margin-left : 0px;
+	font-size : 14px;
+}
+.service-attributes .list-inline {
+	padding-left: 0px;
+	padding-right: 0px;
+	/*display: inline;*/
+	margin-left : 0px;
 }
 
 .service-attributes ul{
@@ -243,6 +251,7 @@ h4 { color: #767676 !important; }
 .button-cash {
 	background: none;
 	color:#00c4ff;
+	font-size:14px;
 }
 
 .cash-search {
@@ -654,7 +663,7 @@ input[name="tos-check"] {
     font-weight: bold;
 }
 .costanalysis{
-	font-size: 18px;
+	font-size: 14px;
 	color: #767676;
 	padding-bottom: 5px;
 	padding-right: 15px !important;
@@ -678,14 +687,17 @@ label {
 	margin-bottom: 20px ;
 	padding-top: 10px !important;
 	padding-bottom: 10px !important;
-	padding-left: 60px !important;
-	padding-right: 60px !important;
-	font-size:18px;
+	padding-left: 10px !important;
+	padding-right: 10px !important;
+	font-size:14px;
 }
 .return-group {
 	padding-bottom: 10px;
 }
+.modal-backdrop {
+    z-index: 0!important;
 
+}
 .calendar {
 	padding-top: 6px;
 	margin-top: 10px;
@@ -993,6 +1005,20 @@ a.more-hours:hover {
 
 #workadu-summary-button {
 	display: none;
+}
+.has-error {
+	color:red;
+}
+.wprengine-loader {
+
+	position: relative;
+	height: 90px;
+	width: 100%;
+	margin:auto;
+}
+.wprengine-loader i {
+	position: relative!important;
+	left:0px !important;
 }
 @media only screen and (min-width: 501px) {
     .workadu-summary.collapse {

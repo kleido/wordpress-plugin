@@ -13,7 +13,7 @@ class VivaPaymentsController
 		// The POST URL and parameters
 
 		if ($mode == 'sandbox') {
-			$request =  'http://demo.vivapayments.com/api/orders';	// demo environment URL
+			$request =  'https://demo.vivapayments.com/api/orders';	// demo environment URL
 		} else {
 			$request =  'https://www.vivapayments.com/api/orders';	// production environment URL
 		}

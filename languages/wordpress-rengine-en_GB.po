@@ -250,3 +250,18 @@ msgstr "Distance"
 
 msgid "duration"
 msgstr "Duration"
+
+msgid "bill_city"
+msgstr "City"
+
+msgid "bill_zip"
+msgstr "ZIP"
+
+msgid "bill_country"
+msgstr "Country"
+
+msgid "payment_methods"
+msgstr "Choose payment method"
+
+msgid "bill_address"
+msgstr "Address"

@@ -24,151 +24,155 @@ jQuery(document).ready(function($) {
 
 	$(document).on('click', '#paypal', function(event) {
 		$('.paypal-settings').toggle();
-		$('.stripe-settings').hide();
-		$('.payzen-settings').hide();
-		$('.viva-settings').hide();
-		$('.alpha-settings').hide();
-		var checked = $("#alpha").is(":checked");
-		if (checked) { 
-			$("#alpha").attr("checked",false);
-		}
-		var checked = $("#stripe").is(":checked");
-		if (checked) { 
-			$("#stripe").attr("checked",false);
-		}
-		var checked2 = $("#payzen").is(":checked");
-		if (checked2) { 
-			$("#payzen").attr("checked",false);
-		}
-		var checked3 = $("#viva").is(":checked");
-		if (checked3) { 
-			$("#viva").attr("checked",false);
-		}
+		// $('.stripe-settings').hide();
+		// $('.payzen-settings').hide();
+		// $('.viva-settings').hide();
+		// $('.alpha-settings').hide();
+		// var checked = $("#alpha").is(":checked");
+		// if (checked) { 
+		// 	$("#alpha").attr("checked",false);
+		// }
+		// var checked = $("#stripe").is(":checked");
+		// if (checked) { 
+		// 	$("#stripe").attr("checked",false);
+		// }
+		// var checked2 = $("#payzen").is(":checked");
+		// if (checked2) { 
+		// 	$("#payzen").attr("checked",false);
+		// }
+		// var checked3 = $("#viva").is(":checked");
+		// if (checked3) { 
+		// 	$("#viva").attr("checked",false);
+		// }
 		if ($(this).is(":checked")) {
-			$('#wpRengineGateway').val('paypal');
+			$('#wpRenginePaypal').val('true');
 		} else {
-			$('#wpRengineGateway').val('false');
+			$('#wpRenginePaypal').val('false');
 		}
+		$('#wpRengineGateway').val('false');
 		
 	});
 
 	$(document).on('click', '#alpha', function(event) {
-		$('.paypal-settings').hide();
+		// $('.paypal-settings').hide();
 		$('.alpha-settings').toggle();
-		$('.stripe-settings').hide();
-		$('.payzen-settings').hide();
-		$('.viva-settings').hide();
-		var checked = $("#stripe").is(":checked");
-		if (checked) { 
-			$("#stripe").attr("checked",false);
-		}
-		var checked = $("#paypal").is(":checked");
-		if (checked) { 
-			$("#paypal").attr("checked",false);
-		}
-		var checked2 = $("#payzen").is(":checked");
-		if (checked2) { 
-			$("#payzen").attr("checked",false);
-		}
-		var checked3 = $("#viva").is(":checked");
-		if (checked3) { 
-			$("#viva").attr("checked",false);
-		}
+		// $('.stripe-settings').hide();
+		// $('.payzen-settings').hide();
+		// $('.viva-settings').hide();
+		// var checked = $("#stripe").is(":checked");
+		// if (checked) { 
+		// 	$("#stripe").attr("checked",false);
+		// }
+		// var checked = $("#paypal").is(":checked");
+		// if (checked) { 
+		// 	$("#paypal").attr("checked",false);
+		// }
+		// var checked2 = $("#payzen").is(":checked");
+		// if (checked2) { 
+		// 	$("#payzen").attr("checked",false);
+		// }
+		// var checked3 = $("#viva").is(":checked");
+		// if (checked3) { 
+		// 	$("#viva").attr("checked",false);
+		// }
 		if ($(this).is(":checked")) {
-			$('#wpRengineGateway').val('alpha');
+			$('#wpRengineAlpha').val('true');
 		} else {
-			$('#wpRengineGateway').val('false');
+			$('#wpRengineAlpha').val('false');
 		}
+		$('#wpRengineGateway').val('false');
 		
 	});
 
 	$(document).on('click', '#stripe', function(event) {
 		$('.stripe-settings').toggle();
-		$('.paypal-settings').hide();
-		$('.payzen-settings').hide();
-		$('.viva-settings').hide();
-		$('.alpha-settings').hide();
-		var checked = $("#alpha").is(":checked");
-		if (checked) { 
-			$("#alpha").attr("checked",false);
-		}
-		var checked = $("#paypal").is(":checked");
-		if (checked) { 
-			$("#paypal").attr("checked",false);
-		}
-		var checked2 = $("#payzen").is(":checked");
-		if (checked2) { 
-			$("#payzen").attr("checked",false);
-		}
-		var checked3 = $("#viva").is(":checked");
-		if (checked3) { 
-			$("#viva").attr("checked",false);
-		}
+		// $('.paypal-settings').hide();
+		// $('.payzen-settings').hide();
+		// $('.viva-settings').hide();
+		// $('.alpha-settings').hide();
+		// var checked = $("#alpha").is(":checked");
+		// if (checked) { 
+		// 	$("#alpha").attr("checked",false);
+		// }
+		// var checked = $("#paypal").is(":checked");
+		// if (checked) { 
+		// 	$("#paypal").attr("checked",false);
+		// }
+		// var checked2 = $("#payzen").is(":checked");
+		// if (checked2) { 
+		// 	$("#payzen").attr("checked",false);
+		// }
+		// var checked3 = $("#viva").is(":checked");
+		// if (checked3) { 
+		// 	$("#viva").attr("checked",false);
+		// }
 		if ($(this).is(":checked")) {
-			$('#wpRengineGateway').val('stripe');
+			$('#wpRengineStripe').val('true');
 		} else {
-			$('#wpRengineGateway').val('false');
+			$('#wpRengineStripe').val('false');
 		}
-
+		$('#wpRengineGateway').val('false');
 	});
 
 	$(document).on('click', '#payzen', function(event) {
 		$('.payzen-settings').toggle();
-		$('.paypal-settings').hide();
-		$('.stripe-settings').hide();
-		$('.viva-settings').hide();
-		$('.alpha-settings').hide();
-		var checked = $("#alpha").is(":checked");
-		if (checked) { 
-			$("#alpha").attr("checked",false);
-		}
-		var checked = $("#stripe").is(":checked");
-		if (checked) { 
-			$("#stripe").attr("checked",false);
-		}
-		var checked2 = $("#paypal").is(":checked");
-		if (checked2) { 
-			$("#paypal").attr("checked",false);
-		}
-		var checked3 = $("#viva").is(":checked");
-		if (checked3) { 
-			$("#viva").attr("checked",false);
-		}
+		// $('.paypal-settings').hide();
+		// $('.stripe-settings').hide();
+		// $('.viva-settings').hide();
+		// $('.alpha-settings').hide();
+		// var checked = $("#alpha").is(":checked");
+		// if (checked) { 
+		// 	$("#alpha").attr("checked",false);
+		// }
+		// var checked = $("#stripe").is(":checked");
+		// if (checked) { 
+		// 	$("#stripe").attr("checked",false);
+		// }
+		// var checked2 = $("#paypal").is(":checked");
+		// if (checked2) { 
+		// 	$("#paypal").attr("checked",false);
+		// }
+		// var checked3 = $("#viva").is(":checked");
+		// if (checked3) { 
+		// 	$("#viva").attr("checked",false);
+		// }
 		if ($(this).is(":checked")) {
-			$('#wpRengineGateway').val('payzen');
+			$('#wpRengineAlpha').val('payzen');
 		}  else {
-			$('#wpRengineGateway').val('false');
+			$('#wpRengineAlpha').val('false');
 		}
+		$('#wpRengineGateway').val('false');
 
 	});
 
 	$(document).on('click', '#viva', function(event) {
 		$('.viva-settings').toggle();
-		$('.paypal-settings').hide();
-		$('.stripe-settings').hide();
-		$('.payzen-settings').hide();
-		$('.alpha-settings').hide();
-		var checked = $("#alpha").is(":checked");
-		if (checked) { 
-			$("#alpha").attr("checked",false);
-		}
-		var checked = $("#stripe").is(":checked");
-		if (checked) { 
-			$("#stripe").attr("checked",false);
-		}
-		var checked2 = $("#paypal").is(":checked");
-		if (checked2) { 
-			$("#paypal").attr("checked",false);
-		}
-		var checked3 = $("#payzen").is(":checked");
-		if (checked3) { 
-			$("#payzen").attr("checked",false);
-		}
+		// $('.paypal-settings').hide();
+		// $('.stripe-settings').hide();
+		// $('.payzen-settings').hide();
+		// $('.alpha-settings').hide();
+		// var checked = $("#alpha").is(":checked");
+		// if (checked) { 
+		// 	$("#alpha").attr("checked",false);
+		// }
+		// var checked = $("#stripe").is(":checked");
+		// if (checked) { 
+		// 	$("#stripe").attr("checked",false);
+		// }
+		// var checked2 = $("#paypal").is(":checked");
+		// if (checked2) { 
+		// 	$("#paypal").attr("checked",false);
+		// }
+		// var checked3 = $("#payzen").is(":checked");
+		// if (checked3) { 
+		// 	$("#payzen").attr("checked",false);
+		// }
 		if ($(this).is(":checked")) {
-			$('#wpRengineGateway').val('viva');
+			$('#wpRengineViva').val('true');
 		} else {
-			$('#wpRengineGateway').val('false');
+			$('#wpRengineViva').val('false');
 		}
+		$('#wpRengineGateway').val('false');
 
 	});
 
